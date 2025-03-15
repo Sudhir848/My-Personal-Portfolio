@@ -135,6 +135,14 @@ document.addEventListener('DOMContentLoaded', function () {
         contactForm.reset();
     });
 
+    window.addEventListener('DOMContentLoaded', function () {
+        if (window.location.hash === "#contact") {
+            document.documentElement.style.scrollBehavior = "auto"; // Disable smooth scrolling
+            document.getElementById('contact').scrollIntoView({ behavior: 'instant' });
+            document.documentElement.style.scrollBehavior = ""; // Re-enable smooth scrolling
+        }
+    });
+
     const rocketBtn = document.getElementById('rocket-btn');
     rocketBtn.addEventListener('click', function () {
         const welcomeSection = document.getElementById('welcome-section');
@@ -200,13 +208,87 @@ document.addEventListener('DOMContentLoaded', function () {
 
     contactForm.addEventListener('submit', function (event) {
         event.preventDefault();
-
+    
         if (validateForm()) {
+            window.location.href = window.location.pathname + "#contact";
             this.submit();
         } else {
             alert('Please fill in all fields correctly.');
         }
     });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const contactForm = document.getElementById('contact-form');
+        const inputs = document.querySelectorAll('.form-control');
+    
+        function resetForm() {
+            inputs.forEach(input => {
+                input.value = '';
+                input.placeholder = ' ';
+                input.nextElementSibling.classList.remove('label-shifted');
+            });
+        }
+    
+        // Ensure form is reset on page load and when navigating back
+        window.addEventListener('pageshow', function () {
+            contactForm.reset();
+        
+            // Check if the stored section exists
+            const scrollToSection = sessionStorage.getItem('scrollToSection');
+            if (scrollToSection) {
+                const targetElement = document.getElementById(scrollToSection);
+                if (targetElement) {
+                    document.documentElement.style.scrollBehavior = 'auto'; // Disable smooth scrolling
+                    targetElement.scrollIntoView({ behavior: 'instant' }); // Instantly move to the section
+                    document.documentElement.style.scrollBehavior = ''; // Re-enable smooth scrolling
+                }
+                sessionStorage.removeItem('scrollToSection'); // Clear after use
+            }
+        });        
+    
+        // Placeholder and label handling
+        function showPlaceholder(input) {
+            if (!input.value) {
+                input.placeholder = input.dataset.placeholder;
+            }
+        }
+    
+        function hidePlaceholder(input) {
+            if (!input.value) {
+                input.placeholder = ' ';
+            }
+        }
+    
+        inputs.forEach(input => {
+            const label = input.nextElementSibling;
+    
+            input.addEventListener('focus', function () {
+                showPlaceholder(this);
+            });
+    
+            input.addEventListener('blur', function () {
+                hidePlaceholder(this);
+            });
+    
+            input.addEventListener('mouseenter', function () {
+                if (!label.classList.contains('label-shifted')) {
+                    showPlaceholder(this);
+                }
+            });
+    
+            input.addEventListener('mouseleave', function () {
+                hidePlaceholder(this);
+            });
+    
+            input.addEventListener('input', function () {
+                if (this.value && !label.classList.contains('label-shifted')) {
+                    label.classList.add('label-shifted');
+                } else if (!this.value) {
+                    label.classList.remove('label-shifted');
+                }
+            });
+        });
+    });    
 
     // Event listener to handle form submission with Enter key
     document.getElementById('contact-form').addEventListener('keydown', function (event) {
