@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="icon" type="image/x-icon" sizes="48x48" href="images/favicon.ico">
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
 </head>
 
 <body>
@@ -72,7 +74,7 @@
                             Lowell</span></a>. I've worked with various programming languages and technologies like
                     <span class="lang">Python</span>, <span class="lang">C</span>, <span class="lang">C++</span>,
                     <span class="lang">HTML</span>, <span class="lang">CSS</span>, and <span
-                        class="lang">Javascript</span>. Aiming to leverage my knowledge in a challenging environment
+                        class="lang">JavaScript</span>. Aiming to leverage my knowledge in a challenging environment
                     that offers growth and learning opportunities.
                 </p>
             </div>
@@ -286,17 +288,19 @@
                     <button type="submit" class="btn btn-info">Send</button>
                 </div>
             </form>
-            <div class="social-media">
-                <a href="https://github.com/Sudhir848" target="_blank">
+            
+            <!-- SOCIAL ICONS BELOW CONTACT FORM -->
+            <div id="social-links-container">
+                <a href="https://github.com/Sudhir848" target="_blank" class="social-icon">
                     <i class="fab fa-github"></i>
                     <span class="tooltip-text">GitHub</span>
                 </a>
-                <a href="https://www.linkedin.com/in/sudhirgunaseelan/" target="_blank">
+                <a href="https://www.linkedin.com/in/sudhirgunaseelan/" target="_blank" class="social-icon">
                     <i class="fab fa-linkedin"></i>
                     <span class="tooltip-text">LinkedIn</span>
                 </a>
-            </div>
-        </section>
+            </div>            
+        </section>        
     </main>
     <footer>
         <p>&copy; 2024 Sudhir Gunaseelan. All rights reserved.
@@ -330,6 +334,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/SocialLinks.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
