@@ -290,7 +290,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });    
 
-    // Event listener to handle form submission with Enter key
+    // Event listener to handle form submission
     document.getElementById('contact-form').addEventListener('keydown', function (event) {
         if (event.key === 'Enter' && event.target.tagName !== 'TEXTAREA') {
             event.preventDefault();
