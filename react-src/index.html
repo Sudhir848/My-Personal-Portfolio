@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Personal Portfolio</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="icon" type="image/x-icon" sizes="48x48" href="/images/favicon.ico">
+</head>
+
+<body>
+  <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand page-scroll" href="https://sudhir848.github.io/My-Personal-Portfolio/" id="brand-link">
+        <img src="/images/favicon.ico" id="brand-logo" alt="Brand Logo" class="navbar-logo" loading="lazy">
+        SUDHIR GUNASEELAN
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" id="navbar-toggler">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="#welcome-section" id="welcome-link">WELCOME</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="#about" id="about-link">ABOUT</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="#skills" id="skills-link">SKILLS</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="#projects" id="projects-link">PROJECTS</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="#contact" id="contact-link">CONTACT</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <main>
+    <section id="welcome-section">
+      <div id="greeting-message"></div>
+      <h1 id="welcome-name" class="animate-fadein">Heyy! I'm Sudhir Gunaseelan</h1>
+      <p id="welcome-jobtitle" class="jobtitle animate-slidein">Software Engineer</p>
+      <div id="down-arrow" class="down-arrow"></div>
+    </section>
+    <section id="about">
+      <h2 id="about-title">A LITTLE BIT ABOUT ME</h2>
+      <div class="about-content">
+        <div class="profile-pic-container" id="profile-pic-container">
+          <picture>
+            <source srcset="/images/profile-pic.webp" type="image/webp">
+            <img src="/images/profile-pic.png" alt="Profile Picture" class="profile-pic bounce" loading="lazy">
+          </picture>
+        </div>
+        <p id="about-text" class="about-item hidden">
+          I'm a passionate software and web developer with a keen interest in creating dynamic and engaging
+          <span class="lang">web</span> & <span class="lang">software applications</span>. Also interested in
+          the field of <span class="lang">Cybersecurity</span>. Completed my <a
+            href="https://drive.google.com/file/d/1_wXv1J-8nU-jFmjhpQ-ECRDB7qGZLaEL/view?usp=sharing"
+            target="_blank"><span class="pop">Bachelor's</span></a> degree in <a
+            href="https://drive.google.com/file/d/1_wXv1J-8nU-jFmjhpQ-ECRDB7qGZLaEL/view?usp=sharing"
+            target="_blank"><span class="pop">Computer
+              Science</span></a> and currently pursuing
+          <a href="https://www.uml.edu/sciences/computer-science/programs/masters/" target="_blank"><span
+              class="pop">Master's</span></a> in<span class="lang"> CS</span> at
+          <a href="https://www.uml.edu/" target="_blank"><span class="pop">University of Massachusetts
+              Lowell</span></a>. I've worked with various programming languages and technologies like
+          <span class="lang">Python</span>, <span class="lang">C</span>, <span class="lang">C++</span>,
+          <span class="lang">HTML</span>, <span class="lang">CSS</span>, and <span class="lang">JavaScript</span>.
+          Aiming to leverage my knowledge in a challenging environment
+          that offers growth and learning opportunities.
+        </p>
+      </div>
+    </section>
+    <section id="skills">
+      <h2 id="skills-title">SKILLS AND TECHNOLOGIES I'VE USED</h2>
+      <div class="skills-icons-container">
+        <ul class="skills-list">
+          <div class="icon-container skill-item hidden">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg"
+              loading="lazy" height="50" />
+          </div>
+          <div class="icon-container skill-item hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" width="55" height="55" viewBox="0 0 48 48" role="img"
+              aria-label="skill icon">
+              <linearGradient id="9nBOzQEsA2vJDj4A8wbora_shQTXiDQiQVR_gr1" x1="22.48" x2="31.833" y1="19.823" y2="45.52"
+                gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#3940a4"></stop>
+                <stop offset="1" stop-color="#293091"></stop>
+              </linearGradient>
+              <path fill="url(#9nBOzQEsA2vJDj4A8wbora_shQTXiDQiQVR_gr1)" fill-rule="evenodd"
+                d="M22.903,3.286c0.679-0.381,1.515-0.381,2.193,0	c3.355,1.883,13.451,7.551,16.807,9.434C42.582,13.1,43,13.804,43,14.566c0,3.766,0,15.101,0,18.867	c0,0.762-0.418,1.466-1.097,1.847c-3.355,1.883-13.451,7.551-16.807,9.434c-0.679,0.381-1.515,0.381-2.193,0	c-3.355-1.883-13.451-7.551-16.807-9.434C5.418,34.899,5,34.196,5,33.434c0-3.766,0-15.101,0-18.867	c0-0.762,0.418-1.466,1.097-1.847C9.451,10.837,19.549,5.169,22.903,3.286z"
+                clip-rule="evenodd"></path>
+              <linearGradient id="9nBOzQEsA2vJDj4A8wborb_shQTXiDQiQVR_gr2" x1="16.43" x2="26.687" y1="3.382" y2="31.562"
+                gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#7b83eb"></stop>
+                <stop offset="1" stop-color="#5961c3"></stop>
+              </linearGradient>
+              <path fill="url(#9nBOzQEsA2vJDj4A8wborb_shQTXiDQiQVR_gr2)" fill-rule="evenodd"
+                d="M5.304,34.404C5.038,34.048,5,33.71,5,33.255c0-3.744,0-15.014,0-18.759c0-0.758,0.417-1.458,1.094-1.836	c3.343-1.872,13.405-7.507,16.748-9.38c0.677-0.379,1.594-0.371,2.271,0.008c3.343,1.872,13.371,7.459,16.714,9.331	c0.27,0.152,0.476,0.335,0.66,0.576L5.304,34.404z"
+                clip-rule="evenodd"></path>
+              <path fill="#fff" fill-rule="evenodd"
+                d="M24,10c7.727,0,14,6.273,14,14s-6.273,14-14,14s-14-6.273-14-14	S16.273,10,24,10z M24,17c3.863,0,7,3.136,7,7c0,3.863-3.137,7-7,7s-7-3.137-7-7C17,20.136,20.136,17,24,17z"
+                clip-rule="evenodd"></path>
+              <linearGradient id="9nBOzQEsA2vJDj4A8wborc_shQTXiDQiQVR_gr3" x1="31.031" x2="39.734" y1="12.865"
+                y2="36.777" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#5c65d6"></stop>
+                <stop offset=".999" stop-color="#464eb0"></stop>
+              </linearGradient>
+              <path fill="url(#9nBOzQEsA2vJDj4A8wborc_shQTXiDQiQVR_gr3)" fill-rule="evenodd"
+                d="M42.485,13.205c0.516,0.483,0.506,1.211,0.506,1.784c0,3.795-0.032,14.589,0.009,18.384c0.004,0.396-0.127,0.813-0.323,1.127	L23.593,24L42.485,13.205z"
+                clip-rule="evenodd"></path>
+              <path
+                d="M24,10c5.128,0,9.602,2.771,12.041,6.887l-6.073,3.47C28.737,18.347,26.527,17,24,17c-3.864,0-7,3.136-7,7 c0,3.863,3.137,7,7,7c2.57,0,4.812-1.392,6.029-3.459l6.132,3.374C33.75,35.142,29.21,38,24,38c-7.727,0-14-6.273-14-14 S16.273,10,24,10 M24,9C15.729,9,9,15.729,9,24s6.729,15,15,15c5.367,0,10.36-2.908,13.03-7.59l0.503-0.882l-0.89-0.49 l-6.132-3.374l-0.851-0.468l-0.493,0.837C28.09,28.863,26.11,30,24,30c-3.308,0-6-2.692-6-6s2.692-6,6-6 c2.099,0,4.011,1.076,5.115,2.879l0.507,0.828l0.842-0.481l6.073-3.47l0.882-0.504l-0.518-0.874C34.205,11.827,29.262,9,24,9L24,9 z"
+                opacity=".05"></path>
+              <path
+                d="M24,10c5.128,0,9.602,2.771,12.041,6.887l-6.073,3.47C28.737,18.347,26.527,17,24,17c-3.864,0-7,3.136-7,7 c0,3.863,3.137,7,7,7c2.57,0,4.812-1.392,6.029-3.459l6.132,3.374C33.75,35.142,29.21,38,24,38c-7.727,0-14-6.273-14-14 S16.273,10,24,10 M24,9.5C16.005,9.5,9.5,16.005,9.5,24S16.005,38.5,24,38.5c5.188,0,10.014-2.812,12.595-7.337l0.252-0.441 l-0.445-0.245l-6.132-3.374l-0.425-0.234l-0.246,0.418C28.431,29.269,26.286,30.5,24,30.5c-3.584,0-6.5-2.916-6.5-6.5 s2.916-6.5,6.5-6.5c2.275,0,4.346,1.166,5.542,3.118l0.253,0.414l0.421-0.241l6.073-3.47l0.441-0.252l-0.259-0.437 C33.864,12.233,29.086,9.5,24,9.5L24,9.5z"
+                opacity=".07"></path>
+            </svg>
+          </div>
+          <div class="icon-container skill-item hidden">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg"
+              loading="lazy" height="50" />
+          </div>
+          <div class="icon-container skill-item hidden">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original-wordmark.svg"
+              loading="lazy" height="50" />
+          </div>
+          <div class="icon-container skill-item hidden">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original-wordmark.svg"
+              loading="lazy" height="50" />
+          </div>
+          <div class="icon-container skill-item hidden">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg"
+              loading="lazy" height="50" />
+          </div>
+          <div class="icon-container skill-item hidden">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bootstrap/bootstrap-original.svg"
+              loading="lazy" height="50" />
+          </div>
+          <div class="icon-container skill-item hidden">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jquery/jquery-original-wordmark.svg"
+              loading="lazy" height="50" />
+          </div>
+          <div class="icon-container skill-item hidden">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original-wordmark.svg"
+              loading="lazy" height="50" />
+          </div>
+          <div class="icon-container skill-item hidden">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original-wordmark.svg"
+              loading="lazy" height="50" />
+          </div>
+          <div class="icon-container skill-item hidden">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original-wordmark.svg"
+              loading="lazy" height="50" />
+          </div>
+          <div class="icon-container skill-item hidden">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/filezilla/filezilla-original.svg"
+              loading="lazy" height="50" />
+          </div>
+          <div class="icon-container skill-item hidden">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/putty/putty-original.svg" loading="lazy"
+              height="50" />
+          </div>
+          <div class="icon-container skill-item hidden">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/anaconda/anaconda-original.svg"
+              loading="lazy" height="50" />
+          </div>
+          <div class="icon-container skill-item hidden">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jupyter/jupyter-original-wordmark.svg"
+              loading="lazy" height="50" />
+          </div>
+          <div class="icon-container skill-item hidden">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tensorflow/tensorflow-original.svg"
+              loading="lazy" height="50" />
+          </div>
+          <div class="icon-container skill-item hidden">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/opencv/opencv-original-wordmark.svg"
+              loading="lazy" height="50" />
+          </div>
+          <div class="icon-container skill-item hidden">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" loading="lazy"
+              height="50" />
+          </div>
+          <div class="icon-container skill-item hidden">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ubuntu/ubuntu-original.svg"
+              loading="lazy" height="50" />
+          </div>
+          <div class="icon-container skill-item hidden">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg" loading="lazy"
+              height="50" />
+          </div>
+          <div class="icon-container skill-item hidden">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original-wordmark.svg"
+              loading="lazy" height="50" />
+          </div>
+        </ul>
+      </div>
+    </section>
+    <section id="projects">
+      <h2 id="projects-title">PROJECTS I'VE DONE</h2>
+      <div class="projects-container">
+        <div class="project-tile hidden" data-title="Monte Carlo Localization with Cozmo Robot"
+          data-link="https://github.com/Sudhir848/Monte-Carlo_Localization"
+          data-description="In my <span style='color: blue;'><strong>Monte Carlo Localization</strong></span> (particle filter localization) project with Cozmo Robot, I worked as a team with my partner, implementing a probabilistic algorithm using <span style='color: blue;'><strong>Python</strong></span> to enable the robot to determine its position within a given environment/arena. The algorithm uses a set of <span style='color: blue;'><strong>particles</strong></span> to represent possible <span style='color: blue;'><strong>positions</strong></span> of the robot. Each particle is weighted based on <span style='color: blue;'><strong>sensor measurements</strong></span> compared to a pre-defined map, allowing the robot to estimate its position with increasing accuracy over time. Main elements of the implementation included sensor data integration, particle weight calculation, resampling techniques, and efficient handling of localization updates to ensure real-time performance.">
+          <div class="project-image">
+            <picture>
+              <source srcset="/images/monte-carlo.webp" type="image/webp">
+              <img src="/images/monte-carlo.jpg" alt="Monte Carlo Project" loading="lazy">
+            </picture>
+            <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="overlay">
+            <div class="text text-overlay">Monte Carlo Localization with Cozmo Robot using Python</div>
+          </div>
+        </div>
+        <div class="project-tile hidden" data-title="Sokoban Game using C++"
+          data-link="https://github.com/Sudhir848/Sokoban-Game-Logic"
+          data-description="<span style='color: blue;'><strong>Sokoban Game</strong></span> is a classic puzzle video game in which the player pushes boxes or crates within a warehouse setting, trying to get them to designated storage locations. I implemented this using <span style='color: blue;'><strong>C++</strong></span> which included logic for player movements, box interactions, and collision detection, and also making use of <span style='color: blue;'><strong>SFML</strong></span> for rendering <span style='color: blue;'><strong>graphics</strong></span>. The Sokoban class manages the game state, player position, and level data, while methods like movePlayer and isWon handle game mechanics and victory conditions. The game employs C++ standard libraries and smart pointers for efficient data management and memory use.">
+          <div class="project-image">
+            <img src="/images/Sokoban.png" alt="Sokoban Game" loading="lazy">
+            <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="overlay">
+            <div class="text text-overlay">Sokoban Game using C++</div>
+          </div>
+        </div>
+        <div class="project-tile hidden" data-title="Checkers Game using C++"
+          data-link="https://github.com/Sudhir848/Checkers-Game"
+          data-description="<span style='color: blue;'><strong>Checkers</strong></span> is a game of two players played on a board. Each player in this game tries to eliminate all pieces belonging to his or her enemy and prevent those pieces from moving at all by utilizing their own pieces. I implemented this game using <span style='color: blue;'><strong>C++</strong></span> that can be played in a terminal with the necessary <span style='color: blue;'><strong>SFML</strong></span> and <span style='color: blue;'><strong>C++ libraries</strong></span>. I utilized <span style='color: blue;'><strong>object-oriented programming</strong></span> principles to manage game states, validate moves, and handle the promotion of pieces to kings. The game supports a graphical user interface using the SFML library, enhancing the user experience with interactive visuals and gameplay mechanics.">
+          <div class="project-image">
+            <img src="/images/Checkers.png" alt="Checkers Game" loading="lazy">
+            <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="overlay">
+            <div class="text text-overlay">Checkers Game using C++</div>
+          </div>
+        </div>
+        <div class="project-tile hidden" data-title="Interactive Multiplication Table Generator"
+          data-link="https://github.com/Sudhir848/Interactive-and-Dynamic-Multiplication-Table-Generator"
+          data-site-link="https://sudhir848.github.io/Interactive-and-Dynamic-Multiplication-Table-Generator/"
+          data-description="I designed an <span style='color: blue;'><strong><a href='https://sudhir848.github.io/Interactive-and-Dynamic-Multiplication-Table-Generator/' target='_blank'>Interactive Multiplication Table Generator</a></strong></span> using <span style='color: blue;'><strong>HTML</strong></span>, <span style='color: blue;'><strong>CSS</span></strong>, and <span style='color: blue;'><strong>JavaScript</span></strong> to provide a dynamic and user-friendly experience.  This tool allows users to input a range of numbers to generate a multiplication table dynamically, updating in real-time as inputs are modified. The user interface is designed with simplicity and responsiveness in mind, ensuring that the multiplication tables are easy to read and interact with on various devices.">
+          <div class="project-image">
+            <picture>
+              <source srcset="/images/Multiplication_Table.webp" type="image/webp">
+              <img src="/images/Multiplication_Table.png" alt="Multiplication Table Generator" loading="lazy">
+            </picture>
+            <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="overlay">
+            <div class="text text-overlay">Interactive Multiplication Table Generator</div>
+          </div>
+        </div>
+        <!-- <div class="project-tile hidden" data-title="Google Open Images Mutual Gaze dataset using Python"
+                    data-link="https://github.com/Sudhir848/ML-Final_Project"
+                    data-description="In this project, I utilized <span style='color: blue;'><strong>Python</strong></span> to analyze the <span style='color: blue;'><strong>Google Open Images Mutual Gaze dataset</strong></span>. The project involved data preprocessing, including filtering and organizing images based on the specific criterias, and employing <span style='color: blue;'><strong>Machine Learning</span></strong> techniques to detect and analyze instances of mutual gaze. For this, I used different Python libraries like <span style='color: blue;'><strong>Pandas</span></strong> for data manipulation and <span style='color: blue;'><strong>Scikit-learn</span></strong> for model training and evaluation. The logistic regression model, incorporating geometric distances and area ratios, achieved an accuracy of 55.28%. Key findings indicated higher recall for detecting mutual gaze, but lower precision due to false positives.">
+                    <div class="project-image">
+                        <picture>
+                            <source srcset="/images/Machine Learning Output - image.webp" type="image/webp">
+                            <img src="/images/Machine Learning Output - image.png" alt="Machine Learning Program" loading="lazy">
+                        </picture>
+                        <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                    <div class="overlay">
+                        <div class="text text-overlay">Google Open Images Mutual Gaze dataset using Python</div>
+                    </div>
+                </div> -->
+        <div class="project-tile hidden" data-title="Scrabble Game using JavaScript and jQeury"
+          data-link="https://github.com/Sudhir848/Scrabble-Game"
+          data-site-link="https://sudhir848.github.io/Scrabble-Game/" data-description="This <span style='color: blue;'><strong><a href='https://sudhir848.github.io/Scrabble-Game/' target='_blank'>one-line version</a></strong></span> of the Scrabble game is a streamlined implementation of the classic word game.
+                    This version focuses on delivering the core gameplay experience in a concise format, allowing players to
+                    form words from a given set of letters to score points based on the value of each letter. The game
+                    features a <span style='color: blue;'><strong>word validation system</strong></span>, a <span style='color: blue;'><strong>scoring mechanism</strong></span>, and a <span style='color: blue;'><strong>user-friendly interface</strong></span> for easy
+                    interaction. I designed this using <span style='color: blue;'><strong>HTML</strong></span>, <span style='color: blue;'><strong>CSS</strong></span>, <span style='color: blue;'><strong>JavaScript</strong></span>, and <span style='color: blue;'><strong>jQuery</strong></span>, combining these
+                    technologies to create a responsive and interactive web application. HTML structures the content, CSS
+                    provides the styling, JavaScript handles the game logic, and jQuery simplifies DOM manipulation and
+                    enhances the user experience.">
+          <div class="project-image">
+            <picture>
+              <source srcset="/images/Scrabble.webp" type="image/webp">
+              <img src="/images/Scrabble.png" alt="Scrabble Game" loading="lazy">
+            </picture>
+            <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="overlay">
+            <div class="text text-overlay">Scrabble Game using JavaScript</div>
+          </div>
+        </div>
+        <div class="project-tile hidden" data-title="freeCodeCamp Magazine"
+          data-link="https://github.com/Sudhir848/freeCodeCamp-Magazine"
+          data-site-link="https://sudhir848.github.io/freeCodeCamp-Magazine/"
+          data-description="For this project, I developed a responsive online <span style='color: blue;'><strong>Magazine</strong></span> using <span style='color: blue;'><strong>HTML5</strong></span>, <span style='color: blue;'><strong>CSS3</span></strong>, and <span style='color: blue;'><strong>JavaScript</span></strong>, following the design principles and guidelines provided by freeCodeCamp as part of a <span style='color: blue;'><strong>Responsive Web Design</span></strong> Certificate Course by freeCodeCamp. This is a responsive design to ensure optimal viewing across various devices and screen sizes.<p>My Certificate for the course can be found <a href='https://freecodecamp.org/certification/SudhirGunaseelan/responsive-web-design' target='_blank'>here</a>.</p>">
+          <div class="project-image">
+            <picture>
+              <source srcset="/images/freeCodeCamp.webp" type="image/webp">
+              <img src="/images/freeCodeCamp.png" alt="Magazine" loading="lazy">
+            </picture>
+            <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+          </div>
+          <div class="overlay">
+            <div class="text text-overlay">freeCodeCamp Magazine</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="resume">
+      <h2 class="resume-title">CHECK OUT MY RÉSUMÉ!</h2>
+      <a href="Resume/My_Resume.pdf" class="resume-button" target="_blank">Grab A Copy</a>
+    </section>
+    <section id="contact">
+      <h2 id="contact-title" class="font-weight-bold">GET IN TOUCH!</h2>
+      <form id="contact-form" action="https://formspree.io/f/xayrzorw" method="POST" class="mx-auto">
+        <div class="form-group">
+          <input type="text" id="name" name="name" class="form-control" placeholder=" " required
+            data-placeholder="Please enter your name" autocomplete="name">
+          <label for="name" class="form-label">Your Name</label>
+        </div>
+        <div class="form-group">
+          <input type="email" id="email" name="email" class="form-control" placeholder=" " required
+            data-placeholder="Please enter your email id" autocomplete="email">
+          <label for="email" class="form-label">Email ID</label>
+        </div>
+        <div class="form-group">
+          <textarea id="message" name="message" class="form-control" placeholder=" " required
+            data-placeholder="Please type a message you would like to send me 😊" autocomplete="on"></textarea>
+          <label for="message" class="form-label">Message</label>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-info">Send</button>
+        </div>
+      </form>
+
+      <div id="social-links-container">
+        <a href="https://github.com/Sudhir848" target="_blank" class="social-icon">
+          <i class="fab fa-github"></i>
+          <span class="tooltip-text">GitHub</span>
+        </a>
+        <a href="https://www.linkedin.com/in/sudhirgunaseelan/" target="_blank" class="social-icon">
+          <i class="fab fa-linkedin"></i>
+          <span class="tooltip-text">LinkedIn</span>
+        </a>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2024 Sudhir Gunaseelan. All rights reserved.
+      <button class="rocket-btn" id="rocket-btn">
+        <picture>
+          <source srcset="/images/rocket.webp" type="image/webp">
+          <img src="/images/rocket.png" alt="Rocket Icon">
+        </picture>
+        <span class="hover-text">Beam me up, Scotty!</span>
+      </button>
+    </p>
+  </footer>
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <div id="modalTitle" class="modal-title"></div>
+      <div class="modal-scroll-container">
+        <div class="modal-image">
+          <img id="img01" class="modal-image-content">
+        </div>
+        <div id="modalDescription" class="modal-description"></div>
+      </div>
+      <div class="button-container">
+        <button id="visitSiteBtn">Visit Site</button>
+        <div class="or-text">OR</div>
+        <button id="visitSourceBtn">Visit Source</button>
+      </div>
+      <button type="button" class="close-modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+  <script defer src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script defer src="/js/script.js"></script>
+  <script defer src="/js/SocialLinks.js"></script>
+  <script defer src="/js/main.js"></script>
+
+</body>
+
+</html>
