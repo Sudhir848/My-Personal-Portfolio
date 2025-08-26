@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function Projects({ items }) {
   return (
     <>
@@ -15,7 +13,6 @@ export default function Projects({ items }) {
             data-description={p.description || ''}
           >
             <div className="project-image">
-              {}
               <img
                 className="project-image-content"
                 src={p.image}
