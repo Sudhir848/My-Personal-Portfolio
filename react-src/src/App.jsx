@@ -267,7 +267,7 @@ export default function App() {
               <div className="icon-container skill-item hidden">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original-wordmark.svg" height="50" loading="lazy" />
               </div>
-              {/* Add the rest of your icons here, exactly as you have now */}
+              {/* Rest of the icons */}
             </ul>
           </div>
         </section>

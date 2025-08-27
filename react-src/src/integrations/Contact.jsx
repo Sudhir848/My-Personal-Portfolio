@@ -13,37 +13,34 @@ export default function Contact({ action }) {
   const MSG_LIMIT = 1000;
   const DRAFT_KEY = "contactDraft.v2";
 
-  // Read any existing draft once (init state without a useEffect)
   const initialDraft = (() => {
     try {
       const raw = localStorage.getItem(DRAFT_KEY);
       return raw ? JSON.parse(raw) : null;
     } catch (e) {
-      void e; // ignore parse errors
+      void e;
       return null;
     }
   })();
 
-  // Controlled fields
+
   const [name, setName] = useState(initialDraft?.name || "");
   const [email, setEmail] = useState(initialDraft?.email || "");
   const [message, setMessage] = useState(initialDraft?.message || "");
 
-  // Other UI state
+
   const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState(null); // null | 'success' | 'error'
   const [errors, setErrors] = useState({});
   const [lastSavedAt, setLastSavedAt] = useState(initialDraft?.savedAt ?? null);
   const [hasDraft, setHasDraft] = useState(!!initialDraft);
 
-  // Keep a snapshot of the last saved values (for "dirty" check)
   savedRef.current = {
     name: hasDraft ? (initialDraft?.name ?? savedRef.current.name) : savedRef.current.name,
     email: hasDraft ? (initialDraft?.email ?? savedRef.current.email) : savedRef.current.email,
     message: hasDraft ? (initialDraft?.message ?? savedRef.current.message) : savedRef.current.message,
   };
 
-  // ---- width/centering only (won't fight your existing styles) ----
   useEffect(() => {
     const css = `
       :root { --contact-form-max: 1320px; } /* tweak to taste */
@@ -74,13 +71,12 @@ export default function Contact({ action }) {
     if (eErr) eMap.email = eErr;
     if (mErr) eMap.message = mErr;
     setErrors(eMap);
-  }, [name, email, message]); // validators are static
+  }, [name, email, message]);
 
   const isValid = Object.keys(errors).length === 0;
   const msgLen = message.length;
   const percent = Math.min(100, (msgLen / MSG_LIMIT) * 100);
 
-  // ---- initialize floating placeholders once ----
   useEffect(() => {
     formRef.current
       ?.querySelectorAll(".form-control")
@@ -89,7 +85,6 @@ export default function Contact({ action }) {
       });
   }, []);
 
-  // ---- auto-save draft (debounced) ----
   useEffect(() => {
     if (!name && !email && !message) {
       try {
@@ -119,13 +114,11 @@ export default function Contact({ action }) {
     return () => clearTimeout(t);
   }, [name, email, message]);
 
-  // ---- unsaved changes (compare against last saved snapshot) ----
   const dirty =
     name !== savedRef.current.name ||
     email !== savedRef.current.email ||
     message !== savedRef.current.message;
 
-  // ---- guard when leaving the page with unsent changes ----
   useEffect(() => {
     const onBeforeUnload = (e) => {
       if (!submitting && dirty) {
@@ -148,7 +141,6 @@ export default function Contact({ action }) {
     setLastSavedAt(null);
   };
 
-  // ---- submit to Formspree (keeps your action URL) ----
   async function onSubmit(e) {
     e.preventDefault();
     setStatus(null);
@@ -182,14 +174,13 @@ export default function Contact({ action }) {
       try {
         formRef.current?.submit();
       } catch (err2) {
-        void err2; // keep eslint happy
+        void err2;
       }
     } finally {
       setSubmitting(false);
     }
   }
 
-  // Format saved timestamp
   const fmtSaved = (() => {
     if (!lastSavedAt) return null;
     try {
