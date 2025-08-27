@@ -1,5 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 
+const validators = {
+  name:    (v) => (!v || v.trim().length < 2 ? 'Please enter your name' : ''),
+  email:   (v) => (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? 'Please enter a valid email' : ''),
+  message: (v) => (!v || v.trim().length < 5 ? 'Please enter a message' : '')
+};
+
 export default function Contact({ action }) {
   const formRef = useRef(null);
   const savedRef = useRef({ name: "", email: "", message: "" });
@@ -58,15 +64,6 @@ export default function Contact({ action }) {
     document.head.appendChild(style);
     return () => style.remove();
   }, []);
-
-  // ---- validation (simple and local) ----
-  const validators = {
-    name: (v) => (!v || v.trim().length < 2 ? "Please enter your name" : ""),
-    email: (v) =>
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? "Please enter a valid email" : "",
-    message: (v) =>
-      !v || v.trim().length < 5 ? "Please enter a message" : "",
-  };
 
   useEffect(() => {
     const eMap = {};
