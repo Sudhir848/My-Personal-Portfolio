@@ -136,7 +136,7 @@
                                 d="M24,10c5.128,0,9.602,2.771,12.041,6.887l-6.073,3.47C28.737,18.347,26.527,17,24,17c-3.864,0-7,3.136-7,7 c0,3.863,3.137,7,7,7c2.57,0,4.812-1.392,6.029-3.459l6.132,3.374C33.75,35.142,29.21,38,24,38c-7.727,0-14-6.273-14-14 S16.273,10,24,10 M24,9C15.729,9,9,15.729,9,24s6.729,15,15,15c5.367,0,10.36-2.908,13.03-7.59l0.503-0.882l-0.89-0.49 l-6.132-3.374l-0.851-0.468l-0.493,0.837C28.09,28.863,26.11,30,24,30c-3.308,0-6-2.692-6-6s2.692-6,6-6 c2.099,0,4.011,1.076,5.115,2.879l0.507,0.828l0.842-0.481l6.073-3.47l0.882-0.504l-0.518-0.874C34.205,11.827,29.262,9,24,9L24,9 z"
                                 opacity=".05"></path>
                             <path
-                                d="M24,10c5.128,0,9.602,2.771,12.041,6.887l-6.073,3.47C28.737,18.347,26.527,17,24,17c-3.864,0-7,3.136-7,7 c0,3.863,3.137,7,7,7c2.57,0,4.812-1.392,6.029-3.459l6.132,3.374C33.75,35.142,29.21,38,24,38c-7.727,0-14-6.273-14-14 S16.273,10,24,10 M24,9.5C16.005,9.5,9.5,16.005,9.5,24S16.005,38.5,24,38.5c5.188,0,10.014-2.812,12.595-7.337l0.252-0.441 l-0.445-0.245l-6.132-3.374l-0.425-0.234l-0.246,0.418C28.431,29.269,26.286,30.5,24,30.5c-3.584,0-6.5-2.916-6.5-6.5 s2.916-6.5,6.5-6.5c2.275,0,4.346,1.166,5.542,3.118l0.253,0.414l0.421-0.241l6.073-3.47l0.441-0.252l-0.259-0.437 C33.864,12.233,29.086,9.5,24,9.5L24,9.5z"
+                                d="M24,10c5.128,0,9.602,2.771,12.041,6.887l-6.073,3.47C28.737,18.347,26.527,17,24,17c-3.864,0-7,3.136-7,7 c0,3.863,3.137,7,7,7c2.57,0,4.812-1.392,6.029-3.459l6.132,3.374C33.75,35.142,29.21,38,24,38c-7.727,0-14-6.273-14-14	S16.273,10,24,10 M24,9.5C16.005,9.5,9.5,16.005,9.5,24S16.005,38.5,24,38.5c5.188,0,10.014-2.812,12.595-7.337l0.252-0.441	l-0.445-0.245l-6.132-3.374l-0.425-0.234l-0.246,0.418C28.431,29.269,26.286,30.5,24,30.5c-3.584,0-6.5-2.916-6.5-6.5	s2.916-6.5,6.5-6.5c2.275,0,4.346,1.166,5.542,3.118l0.253,0.414l0.421-0.241l6.073-3.47l0.441-0.252l-0.259-0.437	C33.864,12.233,29.086,9.5,24,9.5L24,9.5z"
                                 opacity=".07"></path>
                         </svg>
                     </div>
@@ -219,113 +219,27 @@
                 </ul>
             </div>
         </section>
+
         <section id="projects">
             <h2 id="projects-title">PROJECTS I'VE DONE</h2>
-            <div class="projects-container">
-                <div class="project-tile hidden" data-title="Monte Carlo Localization with Cozmo Robot"
-                    data-link="https://github.com/Sudhir848/Monte-Carlo_Localization"
-                    data-description="In my <span style='color: blue;'><strong>Monte Carlo Localization</strong></span> (particle filter localization) project with Cozmo Robot, I worked as a team with my partner, implementing a probabilistic algorithm using <span style='color: blue;'><strong>Python</strong></span> to enable the robot to determine its position within a given environment/arena. The algorithm uses a set of <span style='color: blue;'><strong>particles</strong></span> to represent possible <span style='color: blue;'><strong>positions</strong></span> of the robot. Each particle is weighted based on <span style='color: blue;'><strong>sensor measurements</strong></span> compared to a pre-defined map, allowing the robot to estimate its position with increasing accuracy over time. Main elements of the implementation included sensor data integration, particle weight calculation, resampling techniques, and efficient handling of localization updates to ensure real-time performance.">
-                    <div class="project-image">
-                        <picture>
-                            <source srcset="images/monte-carlo.webp" type="image/webp">
-                            <img src="images/monte-carlo.jpg" alt="Monte Carlo Project" loading="lazy">
-                        </picture>
-                        <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
-                    </div>
-                    <div class="overlay">
-                        <div class="text text-overlay">Monte Carlo Localization with Cozmo Robot using Python</div>
-                    </div>
-                </div>
-                <div class="project-tile hidden" data-title="Sokoban Game using C++"
-                    data-link="https://github.com/Sudhir848/Sokoban-Game-Logic"
-                    data-description="<span style='color: blue;'><strong>Sokoban Game</strong></span> is a classic puzzle video game in which the player pushes boxes or crates within a warehouse setting, trying to get them to designated storage locations. I implemented this using <span style='color: blue;'><strong>C++</strong></span> which included logic for player movements, box interactions, and collision detection, and also making use of <span style='color: blue;'><strong>SFML</strong></span> for rendering <span style='color: blue;'><strong>graphics</strong></span>. The Sokoban class manages the game state, player position, and level data, while methods like movePlayer and isWon handle game mechanics and victory conditions. The game employs C++ standard libraries and smart pointers for efficient data management and memory use.">
-                    <div class="project-image">
-                        <img src="images/Sokoban.png" alt="Sokoban Game" loading="lazy">
-                        <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
-                    </div>
-                    <div class="overlay">
-                        <div class="text text-overlay">Sokoban Game using C++</div>
-                    </div>
-                </div>
-                <div class="project-tile hidden" data-title="Checkers Game using C++"
-                    data-link="https://github.com/Sudhir848/Checkers-Game"
-                    data-description="<span style='color: blue;'><strong>Checkers</strong></span> is a game of two players played on a board. Each player in this game tries to eliminate all pieces belonging to his or her enemy and prevent those pieces from moving at all by utilizing their own pieces. I implemented this game using <span style='color: blue;'><strong>C++</strong></span> that can be played in a terminal with the necessary <span style='color: blue;'><strong>SFML</strong></span> and <span style='color: blue;'><strong>C++ libraries</strong></span>. I utilized <span style='color: blue;'><strong>object-oriented programming</strong></span> principles to manage game states, validate moves, and handle the promotion of pieces to kings. The game supports a graphical user interface using the SFML library, enhancing the user experience with interactive visuals and gameplay mechanics.">
-                    <div class="project-image">
-                        <img src="images/Checkers.png" alt="Checkers Game" loading="lazy">
-                        <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
-                    </div>
-                    <div class="overlay">
-                        <div class="text text-overlay">Checkers Game using C++</div>
-                    </div>
-                </div>
-                <div class="project-tile hidden" data-title="Interactive Multiplication Table Generator"
-                    data-link="https://github.com/Sudhir848/Interactive-and-Dynamic-Multiplication-Table-Generator"
-                    data-site-link="https://sudhir848.github.io/Interactive-and-Dynamic-Multiplication-Table-Generator/"
-                    data-description="I designed an <span style='color: blue;'><strong><a href='https://sudhir848.github.io/Interactive-and-Dynamic-Multiplication-Table-Generator/' target='_blank'>Interactive Multiplication Table Generator</a></strong></span> using <span style='color: blue;'><strong>HTML</strong></span>, <span style='color: blue;'><strong>CSS</span></strong>, and <span style='color: blue;'><strong>JavaScript</span></strong> to provide a dynamic and user-friendly experience.  This tool allows users to input a range of numbers to generate a multiplication table dynamically, updating in real-time as inputs are modified. The user interface is designed with simplicity and responsiveness in mind, ensuring that the multiplication tables are easy to read and interact with on various devices.">
-                    <div class="project-image">
-                        <picture>
-                            <source srcset="images/Multiplication_Table.webp" type="image/webp">
-                            <img src="images/Multiplication_Table.png" alt="Multiplication Table Generator"
-                                loading="lazy">
-                        </picture>
-                        <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
-                    </div>
-                    <div class="overlay">
-                        <div class="text text-overlay">Interactive Multiplication Table Generator</div>
-                    </div>
-                </div>
-                <!-- <div class="project-tile hidden" data-title="Google Open Images Mutual Gaze dataset using Python"
-                    data-link="https://github.com/Sudhir848/ML-Final_Project"
-                    data-description="In this project, I utilized <span style='color: blue;'><strong>Python</strong></span> to analyze the <span style='color: blue;'><strong>Google Open Images Mutual Gaze dataset</strong></span>. The project involved data preprocessing, including filtering and organizing images based on the specific criterias, and employing <span style='color: blue;'><strong>Machine Learning</span></strong> techniques to detect and analyze instances of mutual gaze. For this, I used different Python libraries like <span style='color: blue;'><strong>Pandas</span></strong> for data manipulation and <span style='color: blue;'><strong>Scikit-learn</span></strong> for model training and evaluation. The logistic regression model, incorporating geometric distances and area ratios, achieved an accuracy of 55.28%. Key findings indicated higher recall for detecting mutual gaze, but lower precision due to false positives.">
-                    <div class="project-image">
-                        <picture>
-                            <source srcset="images/Machine Learning Output - image.webp" type="image/webp">
-                            <img src="images/Machine Learning Output - image.png" alt="Machine Learning Program" loading="lazy">
-                        </picture>
-                        <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
-                    </div>
-                    <div class="overlay">
-                        <div class="text text-overlay">Google Open Images Mutual Gaze dataset using Python</div>
-                    </div>
-                </div> -->
-                <div class="project-tile hidden" data-title="Scrabble Game using JavaScript and jQeury"
-                    data-link="https://github.com/Sudhir848/Scrabble-Game"
-                    data-site-link="https://sudhir848.github.io/Scrabble-Game/" data-description="This <span style='color: blue;'><strong><a href='https://sudhir848.github.io/Scrabble-Game/' target='_blank'>one-line version</a></strong></span> of the Scrabble game is a streamlined implementation of the classic word game.
-                    This version focuses on delivering the core gameplay experience in a concise format, allowing players to
-                    form words from a given set of letters to score points based on the value of each letter. The game
-                    features a <span style='color: blue;'><strong>word validation system</strong></span>, a <span style='color: blue;'><strong>scoring mechanism</strong></span>, and a <span style='color: blue;'><strong>user-friendly interface</strong></span> for easy
-                    interaction. I designed this using <span style='color: blue;'><strong>HTML</strong></span>, <span style='color: blue;'><strong>CSS</strong></span>, <span style='color: blue;'><strong>JavaScript</strong></span>, and <span style='color: blue;'><strong>jQuery</strong></span>, combining these
-                    technologies to create a responsive and interactive web application. HTML structures the content, CSS
-                    provides the styling, JavaScript handles the game logic, and jQuery simplifies DOM manipulation and
-                    enhances the user experience.">
-                    <div class="project-image">
-                        <picture>
-                            <source srcset="images/Scrabble.webp" type="image/webp">
-                            <img src="images/Scrabble.png" alt="Scrabble Game" loading="lazy">
-                        </picture>
-                        <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
-                    </div>
-                    <div class="overlay">
-                        <div class="text text-overlay">Scrabble Game using JavaScript</div>
-                    </div>
-                </div>
-                <div class="project-tile hidden" data-title="freeCodeCamp Magazine"
-                    data-link="https://github.com/Sudhir848/freeCodeCamp-Magazine"
-                    data-site-link="https://sudhir848.github.io/freeCodeCamp-Magazine/"
-                    data-description="For this project, I developed a responsive online <span style='color: blue;'><strong>Magazine</strong></span> using <span style='color: blue;'><strong>HTML5</strong></span>, <span style='color: blue;'><strong>CSS3</span></strong>, and <span style='color: blue;'><strong>JavaScript</span></strong>, following the design principles and guidelines provided by freeCodeCamp as part of a <span style='color: blue;'><strong>Responsive Web Design</span></strong> Certificate Course by freeCodeCamp. This is a responsive design to ensure optimal viewing across various devices and screen sizes.<p>My Certificate for the course can be found <a href='https://freecodecamp.org/certification/SudhirGunaseelan/responsive-web-design' target='_blank'>here</a>.</p>">
-                    <div class="project-image">
-                        <picture>
-                            <source srcset="images/freeCodeCamp.webp" type="image/webp">
-                            <img src="images/freeCodeCamp.png" alt="Magazine" loading="lazy">
-                        </picture>
-                        <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
-                    </div>
-                    <div class="overlay">
-                        <div class="text text-overlay">freeCodeCamp Magazine</div>
-                    </div>
-                </div>
+
+            <div class="projects-filter">
+                <label for="projectCategory" id="projects-filter-label">
+                    Choose your project vibe:
+                </label>
+
+                <select id="projectCategory" class="custom-select custom-select-sm"></select>
+
+                <span id="projectsCount" class="projects-count"></span>
+            </div>
+
+            <div class="projects-container" id="projectsContainer">
+                <noscript>
+                    <p>Please enable JavaScript to view projects.</p>
+                </noscript>
             </div>
         </section>
+
         <section id="resume">
             <h2 class="resume-title">CHECK OUT MY RÉSUMÉ!</h2>
             <a href="Resume/My_Resume.pdf" class="resume-button" target="_blank">Grab A Copy</a>

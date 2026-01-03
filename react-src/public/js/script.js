@@ -1,5 +1,8 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
     displayGreeting();
+
+    await loadProjectsFromJson();
+
     projectsObserver();
     skillsObserver();
     aboutObserver();
@@ -81,7 +84,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     window.addEventListener('scroll', function () {
         const navbar = document.getElementById('navbar');
-        const welcomeSection = document.getElementById('welcome-section');
         const sections = document.querySelectorAll('section');
 
         let inWelcomeSection = false;
@@ -137,9 +139,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     window.addEventListener('DOMContentLoaded', function () {
         if (window.location.hash === "#contact") {
-            document.documentElement.style.scrollBehavior = "auto"; // Disable smooth scrolling
+            document.documentElement.style.scrollBehavior = "auto";
             document.getElementById('contact').scrollIntoView({ behavior: 'instant' });
-            document.documentElement.style.scrollBehavior = ""; // Re-enable smooth scrolling
+            document.documentElement.style.scrollBehavior = "";
         }
     });
 
@@ -208,7 +210,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     contactForm.addEventListener('submit', function (event) {
         event.preventDefault();
-    
+
         if (validateForm()) {
             window.location.href = window.location.pathname + "#contact";
             this.submit();
@@ -217,80 +219,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    document.addEventListener('DOMContentLoaded', function () {
-        const contactForm = document.getElementById('contact-form');
-        const inputs = document.querySelectorAll('.form-control');
-    
-        function resetForm() {
-            inputs.forEach(input => {
-                input.value = '';
-                input.placeholder = ' ';
-                input.nextElementSibling.classList.remove('label-shifted');
-            });
-        }
-    
-        // Ensure form is reset on page load and when navigating back
-        window.addEventListener('pageshow', function () {
-            contactForm.reset();
-        
-            // Check if the stored section exists
-            const scrollToSection = sessionStorage.getItem('scrollToSection');
-            if (scrollToSection) {
-                const targetElement = document.getElementById(scrollToSection);
-                if (targetElement) {
-                    document.documentElement.style.scrollBehavior = 'auto'; // Disable smooth scrolling
-                    targetElement.scrollIntoView({ behavior: 'instant' }); // Instantly move to the section
-                    document.documentElement.style.scrollBehavior = ''; // Re-enable smooth scrolling
-                }
-                sessionStorage.removeItem('scrollToSection'); // Clear after use
-            }
-        });        
-    
-        // Placeholder and label handling
-        function showPlaceholder(input) {
-            if (!input.value) {
-                input.placeholder = input.dataset.placeholder;
-            }
-        }
-    
-        function hidePlaceholder(input) {
-            if (!input.value) {
-                input.placeholder = ' ';
-            }
-        }
-    
-        inputs.forEach(input => {
-            const label = input.nextElementSibling;
-    
-            input.addEventListener('focus', function () {
-                showPlaceholder(this);
-            });
-    
-            input.addEventListener('blur', function () {
-                hidePlaceholder(this);
-            });
-    
-            input.addEventListener('mouseenter', function () {
-                if (!label.classList.contains('label-shifted')) {
-                    showPlaceholder(this);
-                }
-            });
-    
-            input.addEventListener('mouseleave', function () {
-                hidePlaceholder(this);
-            });
-    
-            input.addEventListener('input', function () {
-                if (this.value && !label.classList.contains('label-shifted')) {
-                    label.classList.add('label-shifted');
-                } else if (!this.value) {
-                    label.classList.remove('label-shifted');
-                }
-            });
-        });
-    });    
-
-    // Event listener to handle form submission
     document.getElementById('contact-form').addEventListener('keydown', function (event) {
         if (event.key === 'Enter' && event.target.tagName !== 'TEXTAREA') {
             event.preventDefault();
@@ -312,51 +240,58 @@ document.addEventListener('DOMContentLoaded', function () {
     const orText = document.querySelector('.or-text');
     const span = document.getElementsByClassName("close-modal")[0];
 
-    // Store the scroll positions of each modal
     const modalScrollPositions = {};
 
-    document.querySelectorAll('.project-tile').forEach(tile => {
-        tile.addEventListener('click', event => {
-            event.preventDefault();
-            var imgSrc = tile.querySelector('img').src;
-            var title = tile.getAttribute('data-title');
-            var description = tile.getAttribute('data-description');
-            var link = tile.getAttribute('data-link');
-            var siteLink = tile.getAttribute('data-site-link');
+    function bindProjectTileClicks() {
+        document.querySelectorAll('.project-tile').forEach(tile => {
+            if (tile.dataset.bound === "true") return;
+            tile.dataset.bound = "true";
 
-            modal.style.display = "flex";
-            modalImg.src = imgSrc;
-            modalTitle.innerHTML = title;
-            modalDescription.innerHTML = description;
-            visitSourceBtn.onclick = function () {
-                window.open(link, '_blank');
-            }
+            tile.addEventListener('click', event => {
+                event.preventDefault();
 
-            if (siteLink) {
-                visitSiteBtn.style.display = 'block';
-                visitSiteBtn.onclick = function () {
-                    window.open(siteLink, '_blank');
-                };
-            } else {
-                visitSiteBtn.style.display = 'none';
-            }
+                var imgSrc = tile.querySelector('img').src;
+                var title = tile.getAttribute('data-title');
+                var link = tile.getAttribute('data-link');
+                var siteLink = tile.getAttribute('data-site-link');
 
-            if (siteLink && link) {
-                orText.style.display = 'block';
-            } else {
-                orText.style.display = 'none';
-            }
+                var descriptionEncoded = tile.getAttribute('data-description-enc') || "";
+                var description = decodeURIComponent(descriptionEncoded);
 
-            if (modalScrollPositions[title]) {
-                document.querySelector('.modal-scroll-container').scrollTop = modalScrollPositions[title];
-            } else {
-                document.querySelector('.modal-scroll-container').scrollTop = 0;
-            }
+                modal.style.display = "flex";
+                modalImg.src = imgSrc;
+                modalTitle.innerHTML = title;
+                modalDescription.innerHTML = description;
 
-            // Disable background scrolling
-            document.body.style.overflow = 'hidden';
+                visitSourceBtn.onclick = function () {
+                    if (link) window.open(link, '_blank');
+                }
+
+                if (siteLink) {
+                    visitSiteBtn.style.display = 'block';
+                    visitSiteBtn.onclick = function () {
+                        window.open(siteLink, '_blank');
+                    };
+                } else {
+                    visitSiteBtn.style.display = 'none';
+                }
+
+                if (siteLink && link) {
+                    orText.style.display = 'block';
+                } else {
+                    orText.style.display = 'none';
+                }
+
+                if (modalScrollPositions[title]) {
+                    document.querySelector('.modal-scroll-container').scrollTop = modalScrollPositions[title];
+                } else {
+                    document.querySelector('.modal-scroll-container').scrollTop = 0;
+                }
+
+                document.body.style.overflow = 'hidden';
+            });
         });
-    });
+    }
 
     span.onclick = function () {
         modalScrollPositions[modalTitle.innerHTML] = document.querySelector('.modal-scroll-container').scrollTop;
@@ -374,15 +309,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     window.onkeydown = function (event) {
         if (event.key === "Escape") {
-            // Save the current scroll position of the modal before closing it
             modalScrollPositions[modalTitle.innerHTML] = document.querySelector('.modal-scroll-container').scrollTop;
             modal.style.display = "none";
-            // Enable background scrolling
             document.body.style.overflow = 'auto';
         }
     }
 
-    // Event listener to collapse the navbar when a link is clicked on small screens
     document.querySelectorAll('#navbarNav .nav-link').forEach(link => {
         link.addEventListener('click', () => {
             if (window.innerWidth < 992) {
@@ -393,9 +325,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function rotateObserver(elementId) {
         const element = document.getElementById(elementId);
-        const observerOptions = {
-            threshold: 0.5
-        };
+        const observerOptions = { threshold: 0.5 };
 
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
@@ -413,9 +343,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const aboutItems = document.querySelectorAll('.about-item');
         const aboutSection = document.getElementById('about');
 
-        const observerOptions = {
-            threshold: 0.1
-        };
+        const observerOptions = { threshold: 0.1 };
 
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
@@ -438,9 +366,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const skills = document.querySelectorAll('.skill-item');
         const skillsSection = document.getElementById('skills');
 
-        const observerOptions = {
-            threshold: 0.1
-        };
+        const observerOptions = { threshold: 0.1 };
 
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
@@ -459,24 +385,24 @@ document.addEventListener('DOMContentLoaded', function () {
         observer.observe(skillsSection);
     }
 
-    function projectsObserver() {
+    function animateProjectTilesNow() {
         const tiles = document.querySelectorAll('.project-tile');
+        tiles.forEach((tile, index) => {
+            setTimeout(() => {
+                tile.classList.remove('hidden');
+                tile.classList.add('animate-fadein');
+            }, index * 180);
+        });
+    }
+
+    function projectsObserver() {
         const projectsSection = document.getElementById('projects');
+        const observerOptions = { threshold: 0.1 };
 
-        const observerOptions = {
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries, observer) => {
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    tiles.forEach((tile, index) => {
-                        setTimeout(() => {
-                            tile.classList.remove('hidden');
-                            tile.classList.add('animate-fadein');
-                        }, index * 300);
-                    });
-                    observer.unobserve(entry.target);
+                    animateProjectTilesNow();
                 }
             });
         }, observerOptions);
@@ -486,10 +412,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function welcomeObserver() {
         const welcomeSection = document.getElementById('welcome-section');
-
-        const observerOptions = {
-            threshold: 0.5
-        };
+        const observerOptions = { threshold: 0.5 };
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -500,12 +423,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }, observerOptions);
 
         observer.observe(welcomeSection);
-    }
-
-    function decodeHTMLEntities(text) {
-        var txt = document.createElement("textarea");
-        txt.innerHTML = text;
-        return txt.value;
     }
 
     window.onscroll = function () { highlightSection() };
@@ -566,5 +483,119 @@ document.addEventListener('DOMContentLoaded', function () {
         const greetingElement = document.getElementById('greeting-message');
         greetingElement.innerText = greeting;
         greetingElement.classList.add('animate-slidein-top-delay');
+    }
+
+    async function loadProjectsFromJson() {
+        const container = document.getElementById('projectsContainer');
+        const select = document.getElementById('projectCategory');
+        const countEl = document.getElementById('projectsCount');
+
+        if (!container || !select) return;
+
+        let projects = [];
+        try {
+            const res = await fetch('data/projects.json', { cache: 'no-store' });
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            projects = await res.json();
+        } catch (e) {
+            console.error(e);
+            container.innerHTML = `<p>Could not load projects. Please check <code>data/projects.json</code>.</p>`;
+            return;
+        }
+
+        const catSet = new Set();
+        projects.forEach(p => (p.categories || []).forEach(c => catSet.add(c)));
+        const categories = Array.from(catSet).sort();
+
+        const labelMap = {
+            "ai-ml": "AI / ML",
+            robotics: "Robotics",
+            "game-dev": "Game Development",
+            "web-dev": "Web Development",
+            javascript: "JavaScript",
+            cpp: "C++",
+            css: "CSS",
+            cybersecurity: "Cybersecurity"
+        };
+
+        select.innerHTML =
+            `<option value="" selected></option>` +
+            categories.map(c => {
+                const label = labelMap[c] || c;
+                return `<option value="${c}">${label}</option>`;
+            }).join('');
+
+        function escapeAttr(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/"/g, '&quot;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+        }
+
+        function tileHtml(p) {
+            const title = p.title || "";
+            const overlay = p.overlay || title;
+            const source = p.source || "";
+            const demo = p.demo || "";
+            const alt = p.image_alt || title;
+
+            const desc = p.description_html || "";
+            const descEnc = encodeURIComponent(desc);
+
+            const hasWebp = p.image_webp && p.image_webp.trim() !== "";
+            const fallback = p.image_fallback || "";
+            const webp = p.image_webp || "";
+
+            const imageBlock = hasWebp
+                ? `
+                    <picture>
+                        <source srcset="${webp}" type="image/webp">
+                        <img src="${fallback}" alt="${alt}" loading="lazy">
+                    </picture>`
+                : `<img src="${fallback}" alt="${alt}" loading="lazy">`;
+
+            return `
+                <div class="project-tile hidden"
+                    data-title="${escapeAttr(title)}"
+                    data-link="${escapeAttr(source)}"
+                    data-site-link="${escapeAttr(demo)}"
+                    data-description-enc="${descEnc}">
+                    <div class="project-image">
+                        ${imageBlock}
+                        <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+                    </div>
+                    <div class="overlay">
+                        <div class="text text-overlay">${overlay}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function render(filter) {
+            if (!filter) {
+                container.innerHTML = "";
+                if (countEl) countEl.textContent = "";
+                return;
+            }
+
+            const filtered = projects.filter(p => (p.categories || []).includes(filter));
+
+            container.innerHTML = filtered.map(tileHtml).join('');
+            if (countEl) countEl.textContent = `${filtered.length} project${filtered.length === 1 ? '' : 's'}`;
+
+            document.querySelectorAll('.project-tile').forEach(tile => {
+                tile.dataset.bound = "false";
+            });
+            bindProjectTileClicks();
+            animateProjectTilesNow();
+        }
+
+        select.addEventListener('change', function () {
+            render(this.value);
+        });
+
+        select.value = "";
+        render("");
     }
 });
