@@ -258,7 +258,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 var descriptionEncoded = tile.getAttribute('data-description-enc') || "";
                 var description = decodeURIComponent(descriptionEncoded);
 
-                modal.style.display = "flex";
+                modal.classList.add("show");
                 modalImg.src = imgSrc;
                 modalTitle.innerHTML = title;
                 modalDescription.innerHTML = description;
@@ -295,14 +295,14 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     span.onclick = function () {
         modalScrollPositions[modalTitle.innerHTML] = document.querySelector('.modal-scroll-container').scrollTop;
-        modal.style.display = "none";
+        modal.classList.remove("show");
         document.body.style.overflow = 'auto';
     }
 
     window.onclick = function (event) {
         if (event.target == modal) {
             modalScrollPositions[modalTitle.innerHTML] = document.querySelector('.modal-scroll-container').scrollTop;
-            modal.style.display = "none";
+            modal.classList.remove("show");
             document.body.style.overflow = 'auto';
         }
     }
@@ -310,7 +310,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     window.onkeydown = function (event) {
         if (event.key === "Escape") {
             modalScrollPositions[modalTitle.innerHTML] = document.querySelector('.modal-scroll-container').scrollTop;
-            modal.style.display = "none";
+            modal.classList.remove("show");
             document.body.style.overflow = 'auto';
         }
     }
@@ -508,13 +508,9 @@ document.addEventListener('DOMContentLoaded', async function () {
         const categories = Array.from(catSet).sort();
 
         const labelMap = {
-            "ai-ml": "AI / ML",
-            robotics: "Robotics",
+            "ai-ml": "AI / ML / Robotics",
             "game-dev": "Game Development",
-            "web-dev": "Web Development",
-            javascript: "JavaScript",
-            cpp: "C++",
-            css: "CSS",
+            "web-dev": "Web Design",
             cybersecurity: "Cybersecurity"
         };
 
