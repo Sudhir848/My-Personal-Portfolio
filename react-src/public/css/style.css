@@ -151,6 +151,7 @@ main {
     font-weight: bolder;
     padding-top: 0px;
     margin-bottom: 20px;
+    opacity: 0;
 }
 
 #welcome-jobtitle {

@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', async function () {
-    displayGreeting();
+    //displayGreeting();
 
     await loadProjectsFromJson();
 
@@ -530,7 +530,8 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     function runWelcomeTypewriter(nameEl, jobEl) {
         clearWelcomeTypewriterTimers();
-
+        const jobText = getOriginalText(jobEl);
+        jobEl.textContent = jobText;
         jobEl.classList.remove('animate-slidein-bottom-delay');
         jobEl.style.opacity = '0';
         jobEl.style.transform = 'translateY(20px)';
