@@ -158,12 +158,8 @@ main {
     font-weight: bolder;
     color: black;
     opacity: 0;
+    transform: translateY(20px);
     margin-top: 10px;
-}
-
-.jobtitle{
-    opacity: 1;
-    transform: none;
 }
 
 .down-arrow {

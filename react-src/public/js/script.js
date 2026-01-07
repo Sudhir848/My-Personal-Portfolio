@@ -509,8 +509,13 @@ document.addEventListener('DOMContentLoaded', async function () {
         for (let i = 0; i <= text.length; i++) {
             const t = setTimeout(() => {
                 textSpan.textContent = text.slice(0, i);
-                if (i === text.length && typeof done === 'function') done();
+
+                if (i === text.length) {
+                    // cursorSpan.style.display = 'none';
+                    if (typeof done === 'function') done();
+                }
             }, i * speedMs);
+
             welcomeTypewriterTimeouts.push(t);
         }
     }
@@ -525,27 +530,21 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     function runWelcomeTypewriter(nameEl, jobEl) {
         clearWelcomeTypewriterTimers();
+
+        jobEl.classList.remove('animate-slidein-bottom-delay');
+        jobEl.style.opacity = '0';
+        jobEl.style.transform = 'translateY(20px)';
+        void jobEl.offsetWidth;
+
+        jobEl.style.opacity = '';
+        jobEl.style.transform = '';
+        void jobEl.offsetWidth;
+        jobEl.classList.add('animate-slidein-bottom-delay');
         nameEl.style.opacity = '1';
         nameEl.style.transform = 'none';
-
         const nameText = getOriginalText(nameEl);
-
-        const NAME_SPEED = 85;
-
-        jobEl.classList.remove('animate-slidein-top-delay');
-        jobEl.style.opacity = '0';
-        jobEl.style.transform = 'translateY(-20px)';
-
-        typeInto(nameEl, nameText, NAME_SPEED, () => {
-            const t = setTimeout(() => {
-                jobEl.style.opacity = '';
-                jobEl.style.transform = '';
-                void jobEl.offsetWidth;
-                jobEl.classList.add('animate-slidein-top-delay');
-            }, 250);
-
-            welcomeTypewriterTimeouts.push(t);
-        });
+        const NAME_SPEED = 90;
+        typeInto(nameEl, nameText, NAME_SPEED);
     }
 
     function displayGreeting() {
