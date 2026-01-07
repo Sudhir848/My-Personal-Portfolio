@@ -161,6 +161,11 @@ main {
     margin-top: 10px;
 }
 
+.jobtitle{
+    opacity: 1;
+    transform: none;
+}
+
 .down-arrow {
     position: absolute;
     bottom: 30px;
@@ -1079,6 +1084,31 @@ footer {
 .animate-slidein-top-delay {
     animation: slideInFromTop 2s;
     animation-fill-mode: forwards;
+}
+
+.animate-slidein-bottom-delay {
+    animation: slideInFromBottom 2s;
+    animation-fill-mode: forwards;
+}
+
+.tw-text {
+    white-space: pre-wrap;
+}
+
+.tw-cursor {
+    display: inline-block;
+    margin-left: 3px;
+    color: #000;
+    animation: twBlink 0.8s steps(1, end) infinite;
+}
+
+@keyframes twBlink {
+    0%, 49% {
+        opacity: 1;
+    }
+    50%, 100% {
+        opacity: 0;
+    }
 }
 
 /*Media Queries*/

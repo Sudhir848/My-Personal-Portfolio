@@ -451,21 +451,101 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     function triggerWelcomeAnimation() {
-        var nameElement = document.getElementById('welcome-name');
-        var jobTitleElement = document.getElementById('welcome-jobtitle');
-        var greetingElement = document.getElementById('greeting-message');
+        const nameElement = document.getElementById('welcome-name');
+        const jobTitleElement = document.getElementById('welcome-jobtitle');
+        const greetingElement = document.getElementById('greeting-message');
 
-        nameElement.classList.remove('animate-fadein');
-        jobTitleElement.classList.remove('animate-slidein');
+        if (!nameElement || !jobTitleElement || !greetingElement) return;
+
         greetingElement.classList.remove('animate-slidein-top-delay');
-
-        void nameElement.offsetWidth;
-        void jobTitleElement.offsetWidth;
         void greetingElement.offsetWidth;
-
-        nameElement.classList.add('animate-fadein');
-        jobTitleElement.classList.add('animate-slidein');
         setTimeout(displayGreeting, 100);
+
+        runWelcomeTypewriter(nameElement, jobTitleElement);
+    }
+
+    let welcomeTypewriterTimeouts = [];
+
+    function clearWelcomeTypewriterTimers() {
+        welcomeTypewriterTimeouts.forEach(t => clearTimeout(t));
+        welcomeTypewriterTimeouts = [];
+    }
+
+    function prefersReducedMotion() {
+        return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    }
+
+    function ensureTypewriterMarkup(el) {
+        if (!el.dataset.originalText) el.dataset.originalText = el.textContent;
+
+        if (el.querySelector('.tw-text') && el.querySelector('.tw-cursor')) return;
+
+        el.innerHTML = '';
+        const textSpan = document.createElement('span');
+        textSpan.className = 'tw-text';
+
+        const cursorSpan = document.createElement('span');
+        cursorSpan.className = 'tw-cursor';
+        cursorSpan.setAttribute('aria-hidden', 'true');
+        cursorSpan.textContent = '|';
+
+        el.appendChild(textSpan);
+        el.appendChild(cursorSpan);
+    }
+
+    function typeInto(el, text, speedMs, done) {
+        ensureTypewriterMarkup(el);
+        const textSpan = el.querySelector('.tw-text');
+        const cursorSpan = el.querySelector('.tw-cursor');
+        textSpan.textContent = '';
+        cursorSpan.style.display = 'inline-block';
+
+        if (prefersReducedMotion()) {
+            textSpan.textContent = text;
+            if (typeof done === 'function') done();
+            return;
+        }
+
+        for (let i = 0; i <= text.length; i++) {
+            const t = setTimeout(() => {
+                textSpan.textContent = text.slice(0, i);
+                if (i === text.length && typeof done === 'function') done();
+            }, i * speedMs);
+            welcomeTypewriterTimeouts.push(t);
+        }
+    }
+
+    function getOriginalText(el) {
+        if (el.dataset.originalText) return el.dataset.originalText;
+        const existing = el.querySelector('.tw-text');
+        const raw = existing ? existing.textContent : el.textContent;
+        el.dataset.originalText = raw;
+        return raw;
+    }
+
+    function runWelcomeTypewriter(nameEl, jobEl) {
+        clearWelcomeTypewriterTimers();
+        nameEl.style.opacity = '1';
+        nameEl.style.transform = 'none';
+
+        const nameText = getOriginalText(nameEl);
+
+        const NAME_SPEED = 85;
+
+        jobEl.classList.remove('animate-slidein-top-delay');
+        jobEl.style.opacity = '0';
+        jobEl.style.transform = 'translateY(-20px)';
+
+        typeInto(nameEl, nameText, NAME_SPEED, () => {
+            const t = setTimeout(() => {
+                jobEl.style.opacity = '';
+                jobEl.style.transform = '';
+                void jobEl.offsetWidth;
+                jobEl.classList.add('animate-slidein-top-delay');
+            }, 250);
+
+            welcomeTypewriterTimeouts.push(t);
+        });
     }
 
     function displayGreeting() {
