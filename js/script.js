@@ -38,7 +38,6 @@ document.addEventListener('DOMContentLoaded', async function () {
                 }
             }
         }
-
         requestAnimationFrame(scrollStep);
     }
 
