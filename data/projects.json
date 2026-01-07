@@ -2,7 +2,9 @@
   {
     "title": "Monte Carlo Localization with Cozmo Robot",
     "overlay": "Monte Carlo Localization with Cozmo Robot using Python",
-    "categories": ["ai-ml"],
+    "categories": [
+      "ai-ml"
+    ],
     "image_webp": "images/monte-carlo.webp",
     "image_fallback": "images/monte-carlo.jpg",
     "image_alt": "Monte Carlo Project",
@@ -13,7 +15,9 @@
   {
     "title": "Sokoban Game using C++",
     "overlay": "Sokoban Game using C++",
-    "categories": ["game-dev"],
+    "categories": [
+      "game-dev"
+    ],
     "image_webp": "",
     "image_fallback": "images/Sokoban.png",
     "image_alt": "Sokoban Game",
@@ -24,7 +28,9 @@
   {
     "title": "Checkers Game using C++",
     "overlay": "Checkers Game using C++",
-    "categories": ["game-dev"],
+    "categories": [
+      "game-dev"
+    ],
     "image_webp": "",
     "image_fallback": "images/Checkers.png",
     "image_alt": "Checkers Game",
@@ -35,7 +41,9 @@
   {
     "title": "Interactive Multiplication Table Generator",
     "overlay": "Interactive Multiplication Table Generator",
-    "categories": ["web-dev"],
+    "categories": [
+      "web-dev"
+    ],
     "image_webp": "images/Multiplication_Table.webp",
     "image_fallback": "images/Multiplication_Table.png",
     "image_alt": "Multiplication Table Generator",
@@ -46,7 +54,9 @@
   {
     "title": "Scrabble Game using JavaScript and jQeury",
     "overlay": "Scrabble Game using JavaScript",
-    "categories": ["game-dev"],
+    "categories": [
+      "game-dev"
+    ],
     "image_webp": "images/Scrabble.webp",
     "image_fallback": "images/Scrabble.png",
     "image_alt": "Scrabble Game",
@@ -57,7 +67,9 @@
   {
     "title": "freeCodeCamp Magazine",
     "overlay": "freeCodeCamp Magazine",
-    "categories": ["web-dev"],
+    "categories": [
+      "web-dev"
+    ],
     "image_webp": "images/freeCodeCamp.webp",
     "image_fallback": "images/freeCodeCamp.png",
     "image_alt": "Magazine",
@@ -68,7 +80,9 @@
   {
     "title": "Web Application Vulnerability Scanner",
     "overlay": "Web App Vulnerability Scanner using Python & Flask",
-    "categories": ["cybersecurity"],
+    "categories": [
+      "cybersecurity"
+    ],
     "image_webp": "images/web-vuln-scanner.webp",
     "image_fallback": "images/web-vuln-scanner.png",
     "image_alt": "Web Application Vulnerability Scanner",
@@ -79,7 +93,9 @@
   {
     "title": "Wearable Data for Recovery and Stress Monitoring",
     "overlay": "Wearable Stress Monitoring (Transformer + HMM)",
-    "categories": ["ai-ml"],
+    "categories": [
+      "ai-ml"
+    ],
     "image_webp": "images/stress-recovery.webp",
     "image_fallback": "images/stress-recovery.png",
     "image_alt": "Wearable Stress and Recovery Monitoring",
