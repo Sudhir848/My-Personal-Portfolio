@@ -901,6 +901,27 @@ footer {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.modal {
+    overflow: hidden;
+}
+
+.modal,
+.modal * {
+    scroll-behavior: auto !important;
+}
+
+.modal-scroll-container {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+
+}
+
+@supports (backdrop-filter: blur(5px)) {
+    .modal {
+        backdrop-filter: blur(3px);
+    }
+}
+
 .button-container {
     display: flex;
     justify-content: center;
