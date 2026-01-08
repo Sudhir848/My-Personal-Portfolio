@@ -667,17 +667,17 @@ document.addEventListener('DOMContentLoaded', async function () {
             animateProjectTilesNow();
         }
 
-        function applyThumbAspectRatios() {
-            document.querySelectorAll('.project-image img').forEach(img => {
-                const setAR = () => {
-                    const w = img.naturalWidth || 16;
-                    const h = img.naturalHeight || 9;
-                    img.closest('.project-image')?.style.setProperty('--ar', `${w} / ${h}`);
-                };
-                if (img.complete) setAR();
-                else img.addEventListener('load', setAR, { once: true });
-            });
-        }
+        // function applyThumbAspectRatios() {
+        //     document.querySelectorAll('.project-image img').forEach(img => {
+        //         const setAR = () => {
+        //             const w = img.naturalWidth || 16;
+        //             const h = img.naturalHeight || 9;
+        //             img.closest('.project-image')?.style.setProperty('--ar', `${w} / ${h}`);
+        //         };
+        //         if (img.complete) setAR();
+        //         else img.addEventListener('load', setAR, { once: true });
+        //     });
+        // }
 
         select.addEventListener('change', function () {
             render(this.value);

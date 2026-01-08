@@ -1,12 +1,25 @@
 export default function SocialLinks() {
   return (
-    <>
-      <a className="social github" href="https://github.com/Sudhir848" target="_blank" rel="noopener" aria-label="GitHub">
-        <i className="fab fa-github" />
+    <div id="social-links-container">
+      <a
+        href="https://github.com/Sudhir848"
+        target="_blank"
+        rel="noreferrer"
+        className="social-icon"
+      >
+        <i className="fab fa-github"></i>
+        <span className="tooltip-text">GitHub</span>
       </a>
-      <a className="social linkedin" href="https://www.linkedin.com/in/sudhirgunaseelan/" target="_blank" rel="noopener" aria-label="LinkedIn">
-        <i className="fab fa-linkedin" />
+
+      <a
+        href="https://www.linkedin.com/in/sudhirgunaseelan/"
+        target="_blank"
+        rel="noreferrer"
+        className="social-icon"
+      >
+        <i className="fab fa-linkedin"></i>
+        <span className="tooltip-text">LinkedIn</span>
       </a>
-    </>
+    </div>
   );
 }
