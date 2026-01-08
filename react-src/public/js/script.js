@@ -621,7 +621,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             const hasWebp = p.image_webp && p.image_webp.trim() !== "";
             const fallback = p.image_fallback || "";
             const webp = p.image_webp || "";
-
             const imageBlock = hasWebp
                 ? `
                     <picture>
