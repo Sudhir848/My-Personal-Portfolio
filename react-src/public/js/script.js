@@ -681,7 +681,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         select.addEventListener('change', function () {
             render(this.value);
         });
-
         select.value = "";
         render("");
     }
