@@ -39,6 +39,19 @@
     "description_html": "<span style='color: blue;'><strong>Checkers</strong></span> is a game of two players played on a board. Each player in this game tries to eliminate all pieces belonging to his or her enemy and prevent those pieces from moving at all by utilizing their own pieces. I implemented this game using <span style='color: blue;'><strong>C++</strong></span> that can be played in a terminal with the necessary <span style='color: blue;'><strong>SFML</strong></span> and <span style='color: blue;'><strong>C++ libraries</strong></span>. I utilized <span style='color: blue;'><strong>object-oriented programming</strong></span> principles to manage game states, validate moves, and handle the promotion of pieces to kings. The game supports a graphical user interface using the SFML library, enhancing the user experience with interactive visuals and gameplay mechanics."
   },
   {
+    "title": "Personal Portfolio Website",
+    "overlay": "Full-Stack Personal Portfolio (React + Node.js)",
+    "categories": [
+      "web-dev"
+    ],
+    "image_webp": "images/portfolio.webp",
+    "image_fallback": "images/portfolio.png",
+    "image_alt": "Personal Portfolio Website",
+    "source": "https://github.com/Sudhir848/Personal-Portfolio",
+    "demo": "https://sudhir848.github.io/Personal-Portfolio/",
+    "description_html": "I designed and developed my <span style='color: blue;'><strong>Personal Portfolio Website</strong></span> as a full-stack web application to showcase my projects, technical skills, and academic background. The frontend is built using <span style='color: blue;'><strong>React</strong></span>, <span style='color: blue;'><strong>HTML</strong></span>, <span style='color: blue;'><strong>CSS</strong></span>, and <span style='color: blue;'><strong>JavaScript</strong></span>, with an emphasis on <span style='color: blue;'><strong>responsive design</strong></span>, smooth animations, and an intuitive user interface. The backend is implemented as a <span style='color: blue;'><strong>RESTful API</strong></span> using <span style='color: blue;'><strong>Node.js</strong></span> and <span style='color: blue;'><strong>Express</strong></span>, providing functionality for the contact form by securely handling user input and sending emails via a third-party email service. The frontend is deployed on <span style='color: blue;'><strong>GitHub Pages</strong></span>, while the backend is deployed on <span style='color: blue;'><strong>Render</strong></span>, demonstrating end-to-end deployment, environment configuration, and client–server integration."
+  },
+  {
     "title": "Interactive Multiplication Table Generator",
     "overlay": "Interactive Multiplication Table Generator",
     "categories": [
@@ -102,18 +115,5 @@
     "source": "https://github.com/Sudhir848/Wearable-Data-for-Recovery-and-Stress-Monitoring",
     "demo": "",
     "description_html": "In the <span style='color: blue;'><strong>Wearable Data for Recovery and Stress Monitoring</strong></span> project, we worked with the <span style='color: blue;'><strong>LifeSnaps Fitbit</strong></span> dataset by merging wearable activity data with stress and affect survey scores. Performed data preprocessing including handling missing values, normalization, and feature selection to prepare time-series inputs for modeling. To analyze stress patterns over time, we implemented a <span style='color: blue;'><strong>Transformer-based model</strong></span> (from scratch using numpy) for temporal stress classification and a <span style='color: blue;'><strong>Hidden Markov Model (HMM)</strong></span> to capture latent stress and recovery state transitions, allowing comparison between deep learning and probabilistic sequence modeling approaches."
-  },
-  {
-    "title": "Personal Portfolio Website",
-    "overlay": "Full-Stack Personal Portfolio (React + Node.js)",
-    "categories": [
-      "web-dev"
-    ],
-    "image_webp": "images/portfolio.webp",
-    "image_fallback": "images/portfolio.png",
-    "image_alt": "Personal Portfolio Website",
-    "source": "https://github.com/Sudhir848/Personal-Portfolio",
-    "demo": "https://sudhir848.github.io/Personal-Portfolio/",
-    "description_html": "I designed and developed my <span style='color: blue;'><strong>Personal Portfolio Website</strong></span> as a full-stack web application to showcase my projects, technical skills, and academic background. The frontend is built using <span style='color: blue;'><strong>React</strong></span>, <span style='color: blue;'><strong>HTML</strong></span>, <span style='color: blue;'><strong>CSS</strong></span>, and <span style='color: blue;'><strong>JavaScript</strong></span>, with an emphasis on <span style='color: blue;'><strong>responsive design</strong></span>, smooth animations, and an intuitive user interface. The backend is implemented as a <span style='color: blue;'><strong>RESTful API</strong></span> using <span style='color: blue;'><strong>Node.js</strong></span> and <span style='color: blue;'><strong>Express</strong></span>, providing functionality for the contact form by securely handling user input and sending emails via a third-party email service. The frontend is deployed on <span style='color: blue;'><strong>GitHub Pages</strong></span>, while the backend is deployed on <span style='color: blue;'><strong>Render</strong></span>, demonstrating end-to-end deployment, environment configuration, and client–server integration."
   }
 ]
