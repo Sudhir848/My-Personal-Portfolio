@@ -13,15 +13,17 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin: (origin, cb) => {
-    if (!origin) return cb(null, true);
-    if (allowedOrigins.includes(origin)) return cb(null, true);
-    return cb(new Error(`CORS blocked for origin: ${origin}`));
-  }
+  origin: [
+    "https://sudhir848.github.io",
+    "http://localhost:5173"
+  ],
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type"],
 }));
 
+app.options("*", cors());
 
-app.use(express.json({ limit: "200kb" }));
+app.use(express.json());
 
 app.get("/api/health", (_req, res) => res.json({ ok: true }));
 

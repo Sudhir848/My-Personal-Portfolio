@@ -74,13 +74,12 @@ export default function Contact() {
     const message = formData.get("message");
 
     try {
-      const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3001";
+      const API_URL = (import.meta.env.VITE_API_URL ?? "http://localhost:3001").replace(/\/$/, "");
       const res = await fetch(`${API_URL}/api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, message }),
       });
-
       const data = await res.json().catch(() => ({}));
       if (!res.ok || !data.ok) throw new Error(data.error || "Failed to send");
 
