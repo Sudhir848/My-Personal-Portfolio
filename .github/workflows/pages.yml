@@ -2,7 +2,10 @@ name: Deploy React (Vite) to GitHub Pages
 
 on:
   push:
-    branches: [gh-pages]
+    branches: [main]
+    paths:
+      - "react-src/**"
+      - ".github/workflows/pages.yml"
   workflow_dispatch:
 
 permissions:
