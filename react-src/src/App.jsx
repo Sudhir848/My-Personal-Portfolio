@@ -1,18 +1,17 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { projects } from './data/projects.js'
+import Contact from "./integrations/Contact.jsx";
 
 export default function App() {
   const [greeting, setGreeting] = useState('')
   const [modalProject, setModalProject] = useState(null)
   const navRef = useRef(null)
 
-  // Greeting
   useEffect(() => {
     const hours = new Date().getHours()
     setGreeting(hours < 12 ? 'Good Morning!' : hours < 18 ? 'Good Afternoon!' : 'Good Evening!')
   }, [])
 
-  // Smooth scroll helper
   const smoothScrollTo = (el) => {
     if (!el) return
     const start = window.scrollY
@@ -31,7 +30,6 @@ export default function App() {
     requestAnimationFrame(step)
   }
 
-  // Navbar shrink + section highlight
   useEffect(() => {
     const navbar = navRef.current
     const sections = [...document.querySelectorAll('section')]
@@ -61,9 +59,7 @@ export default function App() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // IntersectionObservers (rotate titles + reveal lists)
   useEffect(() => {
-    // rotate animations for section titles
     ;['about-title', 'skills-title', 'projects-title', 'contact-title'].forEach((id) => {
       const el = document.getElementById(id)
       if (!el) return
@@ -78,7 +74,6 @@ export default function App() {
       obs.observe(el)
     })
 
-    // reveal about items staggered
     const aboutSection = document.getElementById('about')
     if (aboutSection) {
       const obs = new IntersectionObserver((entries, o) => {
@@ -97,7 +92,6 @@ export default function App() {
       obs.observe(aboutSection)
     }
 
-    // reveal skills staggered
     const skillsSection = document.getElementById('skills')
     if (skillsSection) {
       const obs = new IntersectionObserver((entries, o) => {
@@ -116,7 +110,6 @@ export default function App() {
       obs.observe(skillsSection)
     }
 
-    // reveal projects staggered
     const projectsSection = document.getElementById('projects')
     if (projectsSection) {
       const obs = new IntersectionObserver((entries, o) => {
@@ -136,7 +129,6 @@ export default function App() {
     }
   }, [])
 
-  // Mobile navbar toggler
   useEffect(() => {
     const toggler = document.getElementById('navbar-toggler')
     const menu = document.getElementById('navbarNav')
@@ -146,30 +138,57 @@ export default function App() {
     return () => toggler.removeEventListener('click', onClick)
   }, [])
 
-  // Contact placeholders / floating labels (+ reset on load)
+  // Placeholder hover/focus behavior — exclude Contact form (Contact.jsx manages it)
   useEffect(() => {
-    const inputs = document.querySelectorAll('.form-control')
-    const showPH = (i) => { if (!i.value) i.placeholder = i.dataset.placeholder }
+    const all = [...document.querySelectorAll('.form-control')];
+    const inputs = all.filter((el) => !el.closest('#contact-form'));
+
+    const showPH = (i) => { if (!i.value) i.placeholder = i.dataset.placeholder || ' ' }
     const hidePH = (i) => { if (!i.value) i.placeholder = ' ' }
+
+    const cleanups = [];
+
     inputs.forEach((input) => {
       const label = input.nextElementSibling
-      input.addEventListener('focus', () => showPH(input))
-      input.addEventListener('blur', () => hidePH(input))
-      input.addEventListener('mouseenter', () => { if (!label.classList.contains('label-shifted')) showPH(input) })
-      input.addEventListener('mouseleave', () => hidePH(input))
-      input.addEventListener('input', () => {
-        if (input.value && !label.classList.contains('label-shifted')) label.classList.add('label-shifted')
-        else if (!input.value) label.classList.remove('label-shifted')
+
+      const onFocus = () => showPH(input);
+      const onBlur = () => hidePH(input);
+      const onEnter = () => { if (label && !label.classList.contains('label-shifted')) showPH(input) }
+      const onLeave = () => hidePH(input);
+      const onInput = () => {
+        if (input.value && label && !label.classList.contains('label-shifted')) label.classList.add('label-shifted')
+        else if (!input.value && label) label.classList.remove('label-shifted')
+      }
+
+      input.addEventListener('focus', onFocus)
+      input.addEventListener('blur', onBlur)
+      input.addEventListener('mouseenter', onEnter)
+      input.addEventListener('mouseleave', onLeave)
+      input.addEventListener('input', onInput)
+
+      cleanups.push(() => {
+        input.removeEventListener('focus', onFocus)
+        input.removeEventListener('blur', onBlur)
+        input.removeEventListener('mouseenter', onEnter)
+        input.removeEventListener('mouseleave', onLeave)
+        input.removeEventListener('input', onInput)
       })
     })
-    const form = document.getElementById('contact-form')
-    form?.reset()
-    const onPageShow = () => form?.reset()
+
+    // Do NOT reset the contact form from here (Contact manages its own reset).
+    const onPageShow = () => {
+      // If you want, you can reset other forms here, but skip contact.
+      // Example:
+      // document.querySelectorAll('form').forEach(f => { if (!f.id || f.id !== 'contact-form') f.reset() })
+    }
+
     window.addEventListener('pageshow', onPageShow)
-    return () => window.removeEventListener('pageshow', onPageShow)
+    return () => {
+      cleanups.forEach((fn) => fn())
+      window.removeEventListener('pageshow', onPageShow)
+    }
   }, [])
 
-  // Build projects grid
   const ProjectGrid = useMemo(
     () => projects.map((p, idx) => (
       <div
@@ -194,7 +213,6 @@ export default function App() {
 
   return (
     <div>
-      {/* Navbar */}
       <nav id="navbar" className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" ref={navRef}>
         <div className="container">
           <a className="navbar-brand page-scroll" href="#welcome-section" id="brand-link">
@@ -289,23 +307,7 @@ export default function App() {
         {/* Contact */}
         <section id="contact">
           <h2 id="contact-title" className="font-weight-bold">GET IN TOUCH!</h2>
-          <form id="contact-form" action="https://formspree.io/f/xayrzorw" method="POST" className="mx-auto">
-            <div className="form-group">
-              <input type="text" id="name" name="name" className="form-control" placeholder=" " required data-placeholder="Please enter your name" autoComplete="name" />
-              <label htmlFor="name" className="form-label">Your Name</label>
-            </div>
-            <div className="form-group">
-              <input type="email" id="email" name="email" className="form-control" placeholder=" " required data-placeholder="Please enter your email id" autoComplete="email" />
-              <label htmlFor="email" className="form-label">Email ID</label>
-            </div>
-            <div className="form-group">
-              <textarea id="message" name="message" className="form-control" placeholder=" " required data-placeholder="Please type a message you would like to send me " autoComplete="on" />
-              <label htmlFor="message" className="form-label">Message</label>
-            </div>
-            <div className="form-group">
-              <button type="submit" className="btn btn-info">Send</button>
-            </div>
-          </form>
+          <Contact />
 
           <div id="social-links-container">
             <a href="https://github.com/Sudhir848" target="_blank" rel="noreferrer" className="social-icon">
