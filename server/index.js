@@ -9,8 +9,7 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://Sudhir848.github.io",
-  "https://Sudhir848.github.io/My-Personal-Portfolio"
+  "https://Sudhir848.github.io"
 ];
 
 app.use(cors({
