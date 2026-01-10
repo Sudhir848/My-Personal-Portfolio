@@ -47,8 +47,8 @@
     "image_webp": "images/portfolio.webp",
     "image_fallback": "images/portfolio.png",
     "image_alt": "Personal Portfolio Website",
-    "source": "https://github.com/Sudhir848/Personal-Portfolio",
-    "demo": "https://sudhir848.github.io/Personal-Portfolio/",
+    "source": "https://github.com/Sudhir848/My-Personal-Portfolio",
+    "demo": "https://sudhir848.github.io/My-Personal-Portfolio/",
     "description_html": "I designed and developed my <span style='color: blue;'><strong>Personal Portfolio Website</strong></span> as a full-stack web application to showcase my projects, technical skills, and academic background. The frontend is built using <span style='color: blue;'><strong>React</strong></span>, <span style='color: blue;'><strong>HTML</strong></span>, <span style='color: blue;'><strong>CSS</strong></span>, and <span style='color: blue;'><strong>JavaScript</strong></span>, with an emphasis on <span style='color: blue;'><strong>responsive design</strong></span>, smooth animations, and an intuitive user interface. The backend is implemented as a <span style='color: blue;'><strong>RESTful API</strong></span> using <span style='color: blue;'><strong>Node.js</strong></span> and <span style='color: blue;'><strong>Express</strong></span>, providing functionality for the contact form by securely handling user input and sending emails via a third-party email service. The frontend is deployed on <span style='color: blue;'><strong>GitHub Pages</strong></span>, while the backend is deployed on <span style='color: blue;'><strong>Render</strong></span>, demonstrating end-to-end deployment, environment configuration, and client–server integration."
   },
   {
