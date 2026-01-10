@@ -32,7 +32,7 @@ jobs:
       - name: Install deps & build
         working-directory: react-src
         env:
-          VITE_API_URL: https://portfolio-api-22yj.onrender.com/
+          VITE_API_URL: https://portfolio-api-22yj.onrender.com
         run: |
           npm ci
           npm run build
