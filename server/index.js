@@ -7,11 +7,20 @@ dotenv.config();
 
 const app = express();
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://Sudhir848.github.io",
+  "https://Sudhir848.github.io/My-Personal-Portfolio"
+];
+
 app.use(cors({
-  origin: [
-    "http://localhost:5173", // React dev server (Vite default)
-  ],
+  origin: (origin, cb) => {
+    if (!origin) return cb(null, true);
+    if (allowedOrigins.includes(origin)) return cb(null, true);
+    return cb(new Error(`CORS blocked for origin: ${origin}`));
+  }
 }));
+
 
 app.use(express.json({ limit: "200kb" }));
 
