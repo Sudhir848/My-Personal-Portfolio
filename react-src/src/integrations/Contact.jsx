@@ -74,7 +74,7 @@ export default function Contact() {
     const message = formData.get("message");
 
     try {
-      const API_URL = import.meta.env.VITE_API_URL;
+      const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3001";
       const res = await fetch(`${API_URL}/api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
