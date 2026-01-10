@@ -134,7 +134,7 @@ export default function Contact() {
                 Sent successfully!
               </div>
               <div style={{ fontWeight: 500, color: "#334155", fontSize: 14 }}>
-                I'll reply as soon as I can.
+                Thanks for your message! I'll reply as soon as I can.
               </div>
             </div>
           </div>
