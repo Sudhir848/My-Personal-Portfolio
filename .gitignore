@@ -1,0 +1,33 @@
+# OS / Editor
+.DS_Store
+Thumbs.db
+
+.vscode/
+.idea/
+
+# Node dependencies
+**/node_modules/
+
+# Build outputs
+**/dist/
+**/dist-ssr/
+**/.parcel-cache/
+**/.vite/
+
+# Env / secrets (global)
+.env
+.env.*
+**/.env
+**/.env.*
+**/env
+
+
+# Logs
+**/logs
+**/*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+.gh-pages/
