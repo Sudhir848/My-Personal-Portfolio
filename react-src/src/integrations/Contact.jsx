@@ -73,21 +73,45 @@ export default function Contact() {
     const email = formData.get("email");
     const message = formData.get("message");
 
+    const API_URL = (import.meta.env.VITE_API_URL ?? "http://localhost:3001").replace(/\/$/, "");
+
     try {
-      const API_URL = (import.meta.env.VITE_API_URL ?? "http://localhost:3001").replace(/\/$/, "");
+      await fetch(`${API_URL}/api/health`).catch(() => null);
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 15000);
+
       const res = await fetch(`${API_URL}/api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, message }),
+        signal: controller.signal,
       });
+
+      clearTimeout(timeoutId);
+
       const data = await res.json().catch(() => ({}));
-      if (!res.ok || !data.ok) throw new Error(data.error || "Failed to send");
+
+      if (!res.ok || !data.ok) {
+        throw new Error(data.error || "Failed to send");
+      }
 
       form.reset();
       setStatus("sent");
     } catch (err) {
       console.error(err);
-      setErrorMsg(err?.message || "Failed to send");
+
+      let message = "Failed to send";
+
+      if (err?.name === "AbortError") {
+        message = "The server took too long to respond. It may be waking up. Please try again in a few minutes.";
+      } else if (err?.message === "Failed to fetch") {
+        message = "The server may be waking up. Please wait a few minutes and try again.";
+      } else if (err?.message) {
+        message = err.message;
+      }
+
+      setErrorMsg(message);
       setStatus("error");
     }
   }
@@ -134,7 +158,7 @@ export default function Contact() {
                 Sent successfully!
               </div>
               <div style={{ fontWeight: 500, color: "#334155", fontSize: 14 }}>
-                Thanks for your message! I'll reply as soon as I can.
+                Thanks for your message! I'll respond as soon as I can.
               </div>
             </div>
           </div>
