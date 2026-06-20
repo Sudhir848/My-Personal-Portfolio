@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 export default function Contact() {
   const [status, setStatus] = useState("idle"); // idle | sending | sent | error
   const [errorMsg, setErrorMsg] = useState("");
+  const [validationMsg, setValidationMsg] = useState("");
   const formRef = useRef(null);
 
   // Re-attach placeholder/label behavior whenever the form becomes visible again (idle/error)
@@ -67,6 +68,7 @@ export default function Contact() {
   async function sendForm(form) {
     setStatus("sending");
     setErrorMsg("");
+    setValidationMsg("");
 
     const formData = new FormData(form);
     const name = formData.get("name");
@@ -114,6 +116,44 @@ export default function Contact() {
       setErrorMsg(message);
       setStatus("error");
     }
+  }
+
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).trim());
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const name = String(formData.get("name") || "").trim();
+    const email = String(formData.get("email") || "").trim();
+    const message = String(formData.get("message") || "").trim();
+
+    if (!name) {
+      setValidationMsg("Please enter your name.");
+      return;
+    }
+
+    if (!email) {
+      setValidationMsg("Please enter your email address.");
+      return;
+    }
+
+    if (!isValidEmail(email)) {
+      setValidationMsg("Please enter a valid email address, like name@example.com.");
+      return;
+    }
+
+    if (!message) {
+      setValidationMsg("Please enter your message.");
+      return;
+    }
+
+    setValidationMsg("");
+    sendForm(form);
   }
 
   return (
@@ -170,6 +210,7 @@ export default function Contact() {
               onClick={() => {
                 setStatus("idle");
                 setErrorMsg("");
+                setValidationMsg("");
                 if (formRef.current) formRef.current.reset();
               }}
             >
@@ -180,7 +221,10 @@ export default function Contact() {
               type="button"
               className="btn btn-light"
               aria-label="Close"
-              onClick={() => setStatus("idle")}
+              onClick={() => {
+                setStatus("idle");
+                setValidationMsg("");
+              }}
               style={{ padding: "6px 10px" }}
             >
               ✕
@@ -201,18 +245,15 @@ export default function Contact() {
         id="contact-form"
         ref={formRef}
         className="mx-auto"
+        noValidate
         style={{ display: status === "sent" ? "none" : "block" }}
-        onSubmit={(e) => {
-          e.preventDefault();
-
-          const form = e.currentTarget;
-
-          if (!form.checkValidity()) {
-            form.reportValidity();
-            return;
+        onSubmit={handleSubmit}
+        onInput={() => {
+          setValidationMsg("");
+          if (status === "error") {
+            setStatus("idle");
+            setErrorMsg("");
           }
-
-          sendForm(form);
         }}
       >
         <div className="form-group">
@@ -258,6 +299,12 @@ export default function Contact() {
           />
           <label htmlFor="message" className="form-label">Message</label>
         </div>
+
+        {validationMsg && (
+          <div className="form-validation-message" role="alert">
+            {validationMsg}
+          </div>
+        )}
 
         <div className="form-group">
           <button
