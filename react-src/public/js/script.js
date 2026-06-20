@@ -194,40 +194,40 @@ document.addEventListener('DOMContentLoaded', async function () {
         });
     });
 
-    function validateForm() {
-        let valid = true;
-        inputs.forEach(input => {
-            if (!input.value.trim()) {
-                valid = false;
-                input.classList.add('is-invalid');
-            } else {
-                input.classList.remove('is-invalid');
-            }
-        });
-        return valid;
-    }
+    // function validateForm() {
+    //     let valid = true;
+    //     inputs.forEach(input => {
+    //         if (!input.value.trim()) {
+    //             valid = false;
+    //             input.classList.add('is-invalid');
+    //         } else {
+    //             input.classList.remove('is-invalid');
+    //         }
+    //     });
+    //     return valid;
+    // }
 
-    contactForm.addEventListener('submit', function (event) {
-        event.preventDefault();
+    // contactForm.addEventListener('submit', function (event) {
+    //     event.preventDefault();
 
-        if (validateForm()) {
-            window.location.href = window.location.pathname + "#contact";
-            this.submit();
-        } else {
-            alert('Please fill in all fields correctly.');
-        }
-    });
+    //     if (validateForm()) {
+    //         window.location.href = window.location.pathname + "#contact";
+    //         this.submit();
+    //     } else {
+    //         alert('Please fill in all fields correctly.');
+    //     }
+    // });
 
-    document.getElementById('contact-form').addEventListener('keydown', function (event) {
-        if (event.key === 'Enter' && event.target.tagName !== 'TEXTAREA') {
-            event.preventDefault();
-            if (validateForm()) {
-                this.submit();
-            } else {
-                alert('Please fill in all fields correctly.');
-            }
-        }
-    });
+    // document.getElementById('contact-form').addEventListener('keydown', function (event) {
+    //     if (event.key === 'Enter' && event.target.tagName !== 'TEXTAREA') {
+    //         event.preventDefault();
+    //         if (validateForm()) {
+    //             this.submit();
+    //         } else {
+    //             alert('Please fill in all fields correctly.');
+    //         }
+    //     }
+    // });
 
     // Modal event listeners
     const modal = document.getElementById("myModal");

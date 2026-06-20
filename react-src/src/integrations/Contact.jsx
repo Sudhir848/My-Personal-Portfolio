@@ -124,7 +124,8 @@ export default function Contact() {
 
   function handleSubmit(e) {
     e.preventDefault();
-
+    e.stopPropagation();
+    
     const form = e.currentTarget;
     const formData = new FormData(form);
 
