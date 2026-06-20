@@ -238,8 +238,8 @@ export default function App() {
         {/* Welcome */}
         <section id="welcome-section">
           <div id="greeting-message" className="animate-slidein-top-delay">{greeting}</div>
-          <h1 id="welcome-name" className="animate-fadein">Heyy! I'm Sudhir Gunaseelan</h1>
-          <p id="welcome-jobtitle" className="jobtitle animate-slidein">Software Engineer</p>
+          <h1 id="welcome-name" className="animate-fadein">Hi, I'm Sudhir Gunaseelan</h1>
+          <p id="welcome-jobtitle" className="jobtitle animate-slidein">Computer Science Graduate | Software Engineering & Cybersecurity</p>
           <div
             id="down-arrow"
             className="down-arrow"
@@ -260,9 +260,7 @@ export default function App() {
               </picture>
             </div>
             <p id="about-text" className="about-item hidden">
-              I'm a passionate software and web developer with a keen interest in creating dynamic and engaging
-              <span className="lang"> web</span> & <span className="lang"> software applications</span>. Also interested in
-              the field of <span className="lang"> Cybersecurity</span>.
+              I'm a Computer Science graduate focused on <span className="lang">software engineering</span> and <span className="lang">cybersecurity</span>. I build web, software, machine learning, and security-focused projects, with hands-on experience in <span className="lang">Python</span>, <span className="lang">C</span>, <span className="lang">C++</span>, <span className="lang">JavaScript</span>, <span className="lang">React</span>, Wireshark, Kali Linux, Burp Suite, OWASP ZAP, Suricata, and Snort.
               Completed my <a href="https://drive.google.com/file/d/1_wXv1J-8nU-jFmjhpQ-ECRDB7qGZLaEL/view?usp=sharing" target="_blank" rel="noreferrer"><span className="pop">Bachelor's</span></a> degree in
               <a href="https://drive.google.com/file/d/1_wXv1J-8nU-jFmjhpQ-ECRDB7qGZLaEL/view?usp=sharing" target="_blank" rel="noreferrer"><span className="pop"> Computer Science</span></a> and currently pursuing
               <a href="https://www.uml.edu/sciences/computer-science/programs/masters/" target="_blank" rel="noreferrer"><span className="pop"> Master's</span></a> in <span className="lang"> CS</span> at
@@ -300,8 +298,18 @@ export default function App() {
 
         {/* Resume */}
         <section id="resume">
-          <h2 className="resume-title">CHECK OUT MY RÉSUMÉ!</h2>
-          <a href="Resume/My_Resume.pdf" className="resume-button" target="_blank" rel="noreferrer">Grab A Copy</a>
+          <h2 className="resume-title">CHOOSE THE RIGHT RÉSUMÉ</h2>
+          <p className="resume-subtitle">
+            I use separate résumé versions so recruiters can quickly see the most relevant experience for each role.
+          </p>
+          <div className="resume-button-group">
+            <a href="Resume/SudhirGunaseelan_Resume.pdf" className="resume-button" target="_blank" rel="noreferrer">
+              Software Engineering Résumé
+            </a>
+            <a href="Resume/My_Resume.pdf" className="resume-button" target="_blank" rel="noreferrer">
+              Cybersecurity Résumé
+            </a>
+          </div>
         </section>
 
         {/* Contact */}

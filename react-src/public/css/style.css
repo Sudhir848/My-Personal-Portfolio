@@ -390,6 +390,23 @@ main {
     border-right: 15px solid #ffcc00;
 }
 
+.resume-subtitle {
+    max-width: 760px;
+    margin: 0 auto 10px auto;
+    font-size: 1.1em;
+}
+
+.resume-button-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.resume-button-group .resume-button {
+    display: inline-block;
+}
+
 @keyframes pulse {
     0% {
         transform: scale(1);
