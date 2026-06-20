@@ -40,8 +40,18 @@ app.post("/api/contact", async (req, res) => {
   try {
     const { name, email, message } = req.body ?? {};
 
-    if (!name || !email || !message) {
+    const cleanName = String(name || "").trim();
+    const cleanEmail = String(email || "").trim();
+    const cleanMessage = String(message || "").trim();
+
+    if (!cleanName || !cleanEmail || !cleanMessage) {
       return res.status(400).json({ ok: false, error: "Missing fields." });
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(cleanEmail)) {
+      return res.status(400).json({ ok: false, error: "Please enter a valid email address." });
     }
 
     if (!process.env.RESEND_API_KEY) {
@@ -54,13 +64,13 @@ app.post("/api/contact", async (req, res) => {
       return res.status(500).json({ ok: false, error: "Missing FROM_EMAIL." });
     }
 
-    const subject = `New message from ${name}`;
-    const text = `Name: ${name}\nEmail: ${email}\n\n${message}`;
+    const subject = `New message from ${cleanName}`;
+    const text = `Name: ${cleanName}\nEmail: ${cleanEmail}\n\n${cleanMessage}`;
 
     const { error } = await resend.emails.send({
       from: `Portfolio Contact <${process.env.FROM_EMAIL}>`,
       to: process.env.TO_EMAIL,
-      reply_to: email,
+      reply_to: cleanEmail,
       subject,
       text,
     });

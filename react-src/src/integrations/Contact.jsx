@@ -201,8 +201,19 @@ export default function Contact() {
         id="contact-form"
         ref={formRef}
         className="mx-auto"
-        noValidate
         style={{ display: status === "sent" ? "none" : "block" }}
+        onSubmit={(e) => {
+          e.preventDefault();
+
+          const form = e.currentTarget;
+
+          if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+          }
+
+          sendForm(form);
+        }}
       >
         <div className="form-group">
           <input
@@ -250,10 +261,9 @@ export default function Contact() {
 
         <div className="form-group">
           <button
-            type="button"
+            type="submit"
             className="btn btn-info"
             disabled={status === "sending"}
-            onClick={() => formRef.current && sendForm(formRef.current)}
           >
             {status === "sending" ? "Sending..." : "Send"}
           </button>
