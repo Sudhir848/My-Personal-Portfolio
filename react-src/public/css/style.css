@@ -814,6 +814,190 @@ section h2::after {
     }
 }
 
+/* === Academic Foundation Section === */
+
+#academic-foundation {
+    min-height: auto;
+    padding: clamp(72px, 8vw, 112px) clamp(18px, 4vw, 56px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--text);
+    text-shadow: none;
+    background:
+        radial-gradient(circle at 22% 12%, rgba(34, 211, 238, 0.13), transparent 30%),
+        radial-gradient(circle at 80% 16%, rgba(124, 58, 237, 0.15), transparent 34%),
+        linear-gradient(180deg, rgba(15, 23, 42, 0.72), rgba(15, 23, 42, 0.48));
+}
+
+.academic-subtitle {
+    width: min(780px, 100%);
+    margin: -4px auto 28px;
+    color: var(--muted);
+    font-size: clamp(1rem, 1.35vw, 1.12rem);
+    font-weight: 650;
+    line-height: 1.7;
+}
+
+.academic-degree-grid {
+    width: min(1120px, 100%);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    align-items: stretch;
+}
+
+.academic-card,
+.earlier-education {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.055));
+    backdrop-filter: blur(18px);
+    box-shadow: 0 22px 70px rgba(0, 0, 0, 0.34);
+    text-align: left;
+}
+
+.academic-card {
+    padding: clamp(22px, 2.4vw, 30px);
+}
+
+.academic-top,
+.earlier-education-card {
+    display: grid;
+    grid-template-columns: 76px 1fr;
+    gap: 18px;
+    align-items: center;
+}
+
+.academic-logo-wrap {
+    width: 68px;
+    height: 68px;
+    display: grid;
+    place-items: center;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    overflow: hidden;
+    flex: 0 0 auto;
+}
+
+.academic-logo-wrap.compact {
+    width: 58px;
+    height: 58px;
+    border-radius: 16px;
+}
+
+.academic-logo {
+    width: 54px;
+    height: 54px;
+    object-fit: contain;
+    display: block;
+}
+
+.academic-logo-wrap.compact .academic-logo {
+    width: 46px;
+    height: 46px;
+}
+
+.academic-heading h3,
+.earlier-education-card h3 {
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(1.08rem, 1.35vw, 1.28rem);
+    font-weight: 900;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+}
+
+.academic-school {
+    margin: 8px 0 0;
+    color: #67e8f9;
+    font-weight: 800;
+    font-size: clamp(1.02rem, 1.2vw, 1.14rem);
+    line-height: 1.45;
+}
+
+.academic-meta,
+.academic-honor,
+.academic-focus,
+.earlier-education-card p,
+.earlier-education-card span {
+    color: var(--muted);
+    font-weight: 650;
+    line-height: 1.55;
+}
+
+.academic-meta {
+    margin: 5px 0 0;
+}
+
+.academic-honor {
+    margin: 5px 0 0;
+    color: #dbeafe;
+}
+
+.academic-focus {
+    margin: 18px 0 0;
+    font-size: clamp(0.98rem, 1.08vw, 1.05rem);
+}
+
+.earlier-education {
+    width: min(1120px, 100%);
+    margin-top: 24px;
+    padding: clamp(20px, 2.4vw, 28px);
+}
+
+.earlier-education-heading {
+    margin-bottom: 18px;
+    color: #ffffff;
+    font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+    font-weight: 900;
+}
+
+.earlier-education-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.earlier-education-card {
+    padding: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.055);
+}
+
+.earlier-education-card p,
+.earlier-education-card span {
+    display: block;
+    margin: 5px 0 0;
+    font-size: 0.96rem;
+}
+
+@media (max-width: 900px) {
+    .academic-degree-grid,
+    .earlier-education-grid {
+        grid-template-columns: 1fr;
+        width: min(720px, 100%);
+    }
+}
+
+@media (max-width: 680px) {
+    .academic-card,
+    .earlier-education {
+        text-align: center;
+    }
+
+    .academic-top,
+    .earlier-education-card {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+    }
+}
+
 #resume {
     background:
         radial-gradient(circle at 20% 10%, rgba(251,191,36,0.12), transparent 22rem),
