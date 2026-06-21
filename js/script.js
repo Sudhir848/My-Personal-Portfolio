@@ -5,10 +5,12 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     projectsObserver();
     skillsObserver();
+    experienceObserver();
     aboutObserver();
     welcomeObserver();
     rotateObserver('about-title');
     rotateObserver('skills-title');
+    rotateObserver('experience-title');
     rotateObserver('projects-title');
     rotateObserver('contact-title');
 
@@ -382,6 +384,37 @@ document.addEventListener('DOMContentLoaded', async function () {
         }, observerOptions);
 
         observer.observe(skillsSection);
+    }
+
+    function experienceObserver() {
+        const experienceItems = document.querySelectorAll('.experience-item');
+
+        if (!experienceItems.length) return;
+
+        const observerOptions = {
+            threshold: 0.18,
+            rootMargin: '0px 0px -80px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const item = entry.target;
+                    const index = Array.from(experienceItems).indexOf(item);
+
+                    setTimeout(() => {
+                        item.classList.remove('hidden');
+                        item.classList.add('animate-fadein');
+                    }, index * 160);
+
+                    observer.unobserve(item);
+                }
+            });
+        }, observerOptions);
+
+        experienceItems.forEach(item => {
+            observer.observe(item);
+        });
     }
 
     function animateProjectTilesNow() {
