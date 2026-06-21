@@ -1,6 +1,6 @@
 [
   {
-    "title": "Monte Carlo Localization with Cozmo Robot",
+    "title": "Cozmo Robot Navigation & Monte Carlo Localization",
     "overlay": "Monte Carlo Localization with Cozmo Robot using Python",
     "categories": [
       "ai-ml"
@@ -65,7 +65,7 @@
     "description_html": "I designed an <span style='color: blue;'><strong><a href='https://sudhir848.github.io/Interactive-and-Dynamic-Multiplication-Table-Generator/' target='_blank'>Interactive Multiplication Table Generator</a></strong></span> using <span style='color: blue;'><strong>HTML</strong></span>, <span style='color: blue;'><strong>CSS</span></strong>, and <span style='color: blue;'><strong>JavaScript</span></strong> to provide a dynamic and user-friendly experience.  This tool allows users to input a range of numbers to generate a multiplication table dynamically, updating in real-time as inputs are modified. The user interface is designed with simplicity and responsiveness in mind, ensuring that the multiplication tables are easy to read and interact with on various devices."
   },
   {
-    "title": "Scrabble Game using JavaScript and jQeury",
+    "title": "Scrabble Game using JavaScript and jQuery",
     "overlay": "Scrabble Game using JavaScript",
     "categories": [
       "game-dev"
