@@ -863,6 +863,38 @@ section h2::after {
     padding: clamp(22px, 2.4vw, 30px);
 }
 
+.academic-details {
+    margin-top: 18px;
+}
+
+.academic-certificate-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-height: 42px;
+    margin: 12px 0 0;
+    padding: 10px 18px;
+    border-radius: 999px;
+    color: #ffffff !important;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    box-shadow: 0 14px 30px rgba(6, 182, 212, 0.20);
+    font-size: 0.9rem;
+    font-weight: 900;
+    line-height: 1.2;
+    text-decoration: none;
+    transition: transform 220ms ease, box-shadow 220ms ease, filter 220ms ease;
+}
+
+.academic-certificate-btn:hover,
+.academic-certificate-btn:focus-visible {
+    color: #ffffff !important;
+    transform: translateY(-3px);
+    filter: brightness(1.08);
+    box-shadow: 0 20px 42px rgba(124, 58, 237, 0.28);
+    text-decoration: none;
+}
+
 .academic-top,
 .earlier-education-card {
     display: grid;
@@ -1042,6 +1074,16 @@ section h2::after {
 @media (max-width: 680px) {
     .academic-card,
     .earlier-education {
+        text-align: center;
+    }
+
+    .academic-details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .academic-focus {
         text-align: center;
     }
 
