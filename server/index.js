@@ -2,11 +2,12 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { Resend } from "resend";
+import rateLimit from "express-rate-limit";
 
 dotenv.config();
 
 const app = express();
-app.use(express.json());
+app.use(express.json({ limit: "20kb" }));
 
 app.use((req, _res, next) => {
   console.log(`${new Date().toISOString()} ${req.method} ${req.url}`);
@@ -36,7 +37,18 @@ app.get("/api/health", (_req, res) => res.json({ ok: true }));
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-app.post("/api/contact", async (req, res) => {
+const contactLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 5,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    ok: false,
+    error: "Too many contact attempts. Please try again later.",
+  },
+});
+
+app.post("/api/contact", contactLimiter, async (req, res) => {
   try {
     const { name, email, message } = req.body ?? {};
 
@@ -44,6 +56,18 @@ app.post("/api/contact", async (req, res) => {
     const cleanEmail = String(email || "").trim();
     const cleanMessage = String(message || "").trim();
 
+    if (cleanName.length > 100) {
+      return res.status(400).json({ ok: false, error: "Name is too long." });
+    }
+
+    if (cleanEmail.length > 254) {
+      return res.status(400).json({ ok: false, error: "Email is too long." });
+    }
+
+    if (cleanMessage.length > 3000) {
+      return res.status(400).json({ ok: false, error: "Message is too long." });
+    }
+    
     if (!cleanName || !cleanEmail || !cleanMessage) {
       return res.status(400).json({ ok: false, error: "Missing fields." });
     }
@@ -55,13 +79,19 @@ app.post("/api/contact", async (req, res) => {
     }
 
     if (!process.env.RESEND_API_KEY) {
-      return res.status(500).json({ ok: false, error: "Missing RESEND_API_KEY." });
+      console.error("Missing required email environment variable.");
+      return res.status(500).json({
+        ok: false,
+        error: "Contact service is temporarily unavailable.",
+      });
     }
     if (!process.env.TO_EMAIL) {
-      return res.status(500).json({ ok: false, error: "Missing TO_EMAIL." });
+      console.error("Missing required email environment variable.");
+      return res.status(500).json({ ok: false, error: "Contact service is temporarily unavailable." });
     }
     if (!process.env.FROM_EMAIL) {
-      return res.status(500).json({ ok: false, error: "Missing FROM_EMAIL." });
+      console.error("Missing required email environment variable.");
+      return res.status(500).json({ ok: false, error: "Contact service is temporarily unavailable." });
     }
 
     const subject = `New message from ${cleanName}`;
