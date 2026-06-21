@@ -976,6 +976,61 @@ section h2::after {
     font-size: 0.96rem;
 }
 
+.academic-location {
+    margin: 4px 0 0;
+    color: var(--muted);
+    font-weight: 750;
+    line-height: 1.45;
+}
+
+.earlier-focus {
+    margin: 10px 0 0;
+    color: #cbd5e1;
+    font-weight: 650;
+    line-height: 1.5;
+}
+
+.education-logo-wrap {
+    background: rgba(255, 255, 255, 0.98);
+}
+
+.education-logo {
+    width: 62px;
+    height: 62px;
+    object-fit: contain;
+}
+
+.earlier-education-card .education-logo {
+    width: 66px;
+    height: 66px;
+}
+
+.academic-logo-wrap {
+    overflow: hidden;
+}
+
+.academic-logo {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    display: block;
+}
+
+.earlier-education-card .academic-logo {
+    width: 76px;
+    height: 76px;
+    object-fit: cover;
+    transform: scale(1.18);
+}
+
+.earlier-education-card:nth-child(1) .academic-logo {
+    transform: scale(1.22);
+}
+
+.earlier-education-card:nth-child(2) .academic-logo {
+    transform: scale(1.18);
+}
+
 @media (max-width: 900px) {
     .academic-degree-grid,
     .earlier-education-grid {
