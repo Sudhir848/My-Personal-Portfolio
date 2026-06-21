@@ -736,6 +736,10 @@ section h2::after {
 }
 
 /* Mobile: single column */
+.academic-stats {
+    justify-content: center;
+}
+
 @media (max-width: 760px) {
     .experience-timeline {
         grid-template-columns: 1fr;
@@ -1061,6 +1065,58 @@ section h2::after {
 
 .earlier-education-card:nth-child(2) .academic-logo {
     transform: scale(1.18);
+}
+
+.academic-date {
+    margin: 5px 0 0;
+    color: var(--muted);
+    font-weight: 750;
+    line-height: 1.55;
+}
+
+.academic-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 12px 0 0;
+}
+
+.academic-stat {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+    padding: 8px 12px;
+    border: 1px solid rgba(34, 211, 238, 0.26);
+    border-radius: 999px;
+    color: #dbeafe;
+    background: rgba(255, 255, 255, 0.07);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+    font-size: 0.86rem;
+    font-weight: 850;
+    line-height: 1.2;
+}
+
+.academic-stat-label {
+    color: #67e8f9;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.academic-stat-value {
+    color: #ffffff;
+    font-weight: 900;
+}
+
+.academic-stat-honor {
+    color: #ffffff;
+    border-color: rgba(251, 191, 36, 0.34);
+    background: rgba(251, 191, 36, 0.10);
+}
+
+.compact-stats {
+    margin-top: 10px;
 }
 
 @media (max-width: 900px) {
@@ -1668,5 +1724,190 @@ footer p {
 
     .modal-description {
         padding: 18px;
+    }
+}
+
+
+/* === Earlier Education alignment update === */
+/* Keeps the school logo beside only the school title/location/type,
+   matching the M.S. and B.S. academic-card layout. */
+.earlier-education-card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+}
+
+.earlier-education-top {
+    display: grid;
+    grid-template-columns: 76px 1fr;
+    gap: 18px;
+    align-items: center;
+}
+
+.earlier-education-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 4px;
+}
+
+.earlier-education-card .academic-stats {
+    justify-content: flex-start;
+}
+
+.earlier-education-card .academic-logo-wrap.compact {
+    width: 68px;
+    height: 68px;
+    border-radius: 18px;
+}
+
+.earlier-education-card .academic-logo {
+    width: 58px;
+    height: 58px;
+    object-fit: contain;
+    transform: none;
+}
+
+.earlier-education-card:nth-child(1) .academic-logo,
+.earlier-education-card:nth-child(2) .academic-logo {
+    transform: none;
+}
+
+.earlier-education-heading-copy {
+    min-width: 0;
+}
+
+.earlier-education-heading-copy p {
+    margin: 5px 0 0;
+}
+
+/* Force grade/percentage to remain compact chips instead of large circular badges. */
+.earlier-education-card .academic-stat {
+    width: fit-content;
+    min-width: 0;
+    height: auto;
+    min-height: 0;
+    padding: 8px 12px;
+    border-radius: 999px;
+    aspect-ratio: auto;
+}
+
+@media (max-width: 680px) {
+    .earlier-education-top {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+    }
+
+    .earlier-education-details {
+        align-items: center;
+    }
+
+    .earlier-education-card .academic-stats {
+        justify-content: center;
+    }
+}
+
+
+/* === Final Earlier Education compact layout override === */
+/* Keeps earlier-school logos aligned like the M.S./B.S. cards and forces grades into compact chips. */
+.earlier-education-card {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 18px !important;
+    align-items: stretch !important;
+    padding: 22px 28px !important;
+}
+
+.earlier-education-top {
+    display: grid !important;
+    grid-template-columns: 76px 1fr !important;
+    gap: 18px !important;
+    align-items: center !important;
+}
+
+.earlier-education-details {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    margin-top: 2px !important;
+}
+
+.earlier-education-card .academic-logo-wrap.compact {
+    width: 68px !important;
+    height: 68px !important;
+    border-radius: 18px !important;
+}
+
+.earlier-education-card .academic-logo {
+    width: 54px !important;
+    height: 54px !important;
+    object-fit: contain !important;
+    transform: none !important;
+}
+
+.earlier-education-heading-copy {
+    min-width: 0 !important;
+}
+
+.earlier-education-heading-copy p {
+    margin: 5px 0 0 !important;
+}
+
+.earlier-education-card .academic-date {
+    margin: 0 0 10px !important;
+}
+
+.earlier-education-card .academic-stats,
+.earlier-education-card .compact-stats {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin: 0 !important;
+}
+
+.earlier-education-card .academic-stat {
+    display: inline-flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    width: fit-content !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: auto !important;
+    padding: 8px 12px !important;
+    border-radius: 999px !important;
+    font-size: 0.86rem !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+}
+
+.earlier-education-card .academic-stat-label,
+.earlier-education-card .academic-stat-value {
+    display: inline !important;
+    font-size: 0.86rem !important;
+    line-height: 1.2 !important;
+}
+
+@media (max-width: 680px) {
+    .earlier-education-top {
+        grid-template-columns: 1fr !important;
+        justify-items: center !important;
+        text-align: center !important;
+    }
+
+    .earlier-education-details {
+        align-items: center !important;
+    }
+
+    .earlier-education-card .academic-stats,
+    .earlier-education-card .compact-stats {
+        justify-content: center !important;
     }
 }
