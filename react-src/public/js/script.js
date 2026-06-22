@@ -240,8 +240,17 @@ document.addEventListener('DOMContentLoaded', async function () {
     const visitSiteBtn = document.getElementById("visitSiteBtn");
     const orText = document.querySelector('.or-text');
     const span = document.getElementsByClassName("close-modal")[0];
+    let lastFocusedElement = null;
 
     const modalScrollPositions = {};
+
+    function closeProjectModal() {
+        modalScrollPositions[modalTitle.textContent] = document.querySelector('.modal-scroll-container').scrollTop;
+        modal.classList.remove("show");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = 'auto';
+        if (lastFocusedElement) lastFocusedElement.focus();
+    }
 
     function bindProjectTileClicks() {
         document.querySelectorAll('.project-tile').forEach(tile => {
@@ -259,6 +268,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 var descriptionEncoded = tile.getAttribute('data-description-enc') || "";
                 var description = decodeURIComponent(descriptionEncoded);
 
+                lastFocusedElement = document.activeElement;
                 modal.classList.add("show");
                 modal.setAttribute("aria-hidden", "false");
                 modalImg.src = imgSrc;
@@ -294,6 +304,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 }
 
                     document.body.style.overflow = 'hidden';
+                    span.focus();
                 }
 
                 tile.addEventListener('click', event => {
@@ -308,28 +319,17 @@ document.addEventListener('DOMContentLoaded', async function () {
         });
     }
 
-    span.onclick = function () {
-        modalScrollPositions[modalTitle.textContent] = document.querySelector('.modal-scroll-container').scrollTop;
-        modal.classList.remove("show");
-        modal.setAttribute("aria-hidden", "true");
-        document.body.style.overflow = 'auto';
-    }
+    span.onclick = closeProjectModal;
 
     window.onclick = function (event) {
         if (event.target == modal) {
-            modalScrollPositions[modalTitle.textContent] = document.querySelector('.modal-scroll-container').scrollTop;
-            modal.classList.remove("show");
-            modal.setAttribute("aria-hidden", "true");
-            document.body.style.overflow = 'auto';
+            closeProjectModal();
         }
     }
 
     window.onkeydown = function (event) {
-        if (event.key === "Escape") {
-            modalScrollPositions[modalTitle.textContent] = document.querySelector('.modal-scroll-container').scrollTop;
-            modal.classList.remove("show");
-            modal.setAttribute("aria-hidden", "true");
-            document.body.style.overflow = 'auto';
+        if (event.key === "Escape" && modal.classList.contains("show")) {
+            closeProjectModal();
         }
     }
 

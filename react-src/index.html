@@ -570,23 +570,30 @@
             </button>
         </p>
     </footer>
-    <div id="myModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+    <div id="myModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDescription" aria-hidden="true">
         <div class="modal-content">
-            <h3 id="modalTitle" class="modal-title"></h3>
-            <div class="modal-scroll-container">
-                <div class="modal-image">
-                    <img id="img01" class="modal-image-content" alt="">
+            <div class="modal-header">
+                <div>
+                    <p class="modal-eyebrow">Project Case Study</p>
+                    <h3 id="modalTitle" class="modal-title"></h3>
                 </div>
-                <div id="modalDescription" class="modal-description"></div>
+                <button type="button" class="close-modal" aria-label="Close project details">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="button-container">
+            <div class="modal-scroll-container">
+                <div class="modal-layout">
+                    <figure class="modal-image">
+                        <img id="img01" class="modal-image-content" alt="">
+                    </figure>
+                    <div id="modalDescription" class="modal-description"></div>
+                </div>
+            </div>
+            <div class="button-container modal-actions">
                 <button id="visitSiteBtn">Visit Site</button>
                 <div class="or-text">OR</div>
                 <button id="visitSourceBtn">Visit Source</button>
             </div>
-            <button type="button" class="close-modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
         </div>
     </div>
     <script defer src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
