@@ -248,8 +248,8 @@ document.addEventListener('DOMContentLoaded', async function () {
             if (tile.dataset.bound === "true") return;
             tile.dataset.bound = "true";
 
-            tile.addEventListener('click', event => {
-                event.preventDefault();
+            function openProjectModal(tile, event) {
+                if (event) event.preventDefault();
 
                 var imgSrc = tile.querySelector('img').src;
                 var title = tile.getAttribute('data-title');
@@ -293,8 +293,18 @@ document.addEventListener('DOMContentLoaded', async function () {
                     document.querySelector('.modal-scroll-container').scrollTop = 0;
                 }
 
-                document.body.style.overflow = 'hidden';
-            });
+                    document.body.style.overflow = 'hidden';
+                }
+
+                tile.addEventListener('click', event => {
+                    openProjectModal(tile, event);
+                });
+
+                tile.addEventListener('keydown', event => {
+                    if (event.key === "Enter" || event.key === " ") {
+                        openProjectModal(tile, event);
+                    }
+                });
         });
     }
 
@@ -671,6 +681,9 @@ document.addEventListener('DOMContentLoaded', async function () {
 
             return `
                 <div class="project-tile hidden"
+                    role="button"
+                    tabindex="0"
+                    aria-label="Open ${escapeAttr(title)} project details"
                     data-title="${escapeAttr(title)}"
                     data-link="${escapeAttr(source)}"
                     data-site-link="${escapeAttr(demo)}"
