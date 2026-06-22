@@ -295,7 +295,7 @@ export default function Contact() {
             placeholder=" "
             required
             autoComplete="on"
-            data-placeholder="Please type a message you would like to send me 😊"
+            data-placeholder="Please type a message you would like to send me. I'll get back to you soon! 😊"
             disabled={status === "sending"}
           />
           <label htmlFor="message" className="form-label">Message</label>
