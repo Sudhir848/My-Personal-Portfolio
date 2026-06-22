@@ -841,7 +841,7 @@ section h2::after {
 
 #academic-foundation {
     min-height: auto;
-    padding: clamp(72px, 8vw, 112px) clamp(18px, 4vw, 56px);
+    padding: clamp(72px, 8vw, 112px) clamp(18px, 4vw, 56px) clamp(42px, 5vw, 72px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1077,11 +1077,11 @@ section h2::after {
 .earlier-education {
     width: min(1120px, 100%);
     margin-top: 24px;
-    padding: clamp(20px, 2.4vw, 28px);
+    padding: 8px 12px;
 }
 
 .earlier-education-heading {
-    margin-bottom: 18px;
+    margin-bottom: 5px;
     color: #ffffff;
     font-size: clamp(1.1rem, 1.5vw, 1.35rem);
     font-weight: 900;
