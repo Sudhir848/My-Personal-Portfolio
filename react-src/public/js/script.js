@@ -260,8 +260,10 @@ document.addEventListener('DOMContentLoaded', async function () {
                 var description = decodeURIComponent(descriptionEncoded);
 
                 modal.classList.add("show");
+                modal.setAttribute("aria-hidden", "false");
                 modalImg.src = imgSrc;
-                modalTitle.innerHTML = title;
+                modalImg.alt = title ? `${title} project screenshot` : "Project screenshot";
+                modalTitle.textContent = title;
                 modalDescription.innerHTML = description;
 
                 visitSourceBtn.onclick = function () {
@@ -295,23 +297,26 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     span.onclick = function () {
-        modalScrollPositions[modalTitle.innerHTML] = document.querySelector('.modal-scroll-container').scrollTop;
+        modalScrollPositions[modalTitle.textContent] = document.querySelector('.modal-scroll-container').scrollTop;
         modal.classList.remove("show");
+        modal.setAttribute("aria-hidden", "true");
         document.body.style.overflow = 'auto';
     }
 
     window.onclick = function (event) {
         if (event.target == modal) {
-            modalScrollPositions[modalTitle.innerHTML] = document.querySelector('.modal-scroll-container').scrollTop;
+            modalScrollPositions[modalTitle.textContent] = document.querySelector('.modal-scroll-container').scrollTop;
             modal.classList.remove("show");
+            modal.setAttribute("aria-hidden", "true");
             document.body.style.overflow = 'auto';
         }
     }
 
     window.onkeydown = function (event) {
         if (event.key === "Escape") {
-            modalScrollPositions[modalTitle.innerHTML] = document.querySelector('.modal-scroll-container').scrollTop;
+            modalScrollPositions[modalTitle.textContent] = document.querySelector('.modal-scroll-container').scrollTop;
             modal.classList.remove("show");
+            modal.setAttribute("aria-hidden", "true");
             document.body.style.overflow = 'auto';
         }
     }
