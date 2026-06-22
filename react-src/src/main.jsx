@@ -1,6 +1,8 @@
 import ReactDOM from "react-dom/client";
+import DOMPurify from "dompurify";
 import Contact from "./integrations/Contact.jsx";
 import SocialLinks from "./integrations/SocialLinks.jsx";
+window.DOMPurify = DOMPurify;
 
 function mountContact() {
   const oldForm = document.getElementById("contact-form");

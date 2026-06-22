@@ -264,7 +264,9 @@ document.addEventListener('DOMContentLoaded', async function () {
                 modalImg.src = imgSrc;
                 modalImg.alt = title ? `${title} project screenshot` : "Project screenshot";
                 modalTitle.textContent = title;
-                modalDescription.innerHTML = description;
+                modalDescription.innerHTML = window.DOMPurify
+                    ? window.DOMPurify.sanitize(description)
+                    : "";
 
                 visitSourceBtn.onclick = function () {
                     if (link) window.open(link, '_blank');
