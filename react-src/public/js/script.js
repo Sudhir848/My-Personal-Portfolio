@@ -94,6 +94,31 @@ document.addEventListener('DOMContentLoaded', async function () {
     window.addEventListener('resize', syncScrollOffsetVariable);
     window.addEventListener('orientationchange', () => window.setTimeout(syncScrollOffsetVariable, 250));
 
+    function jumpToTopWithoutPageScroll() {
+        document.documentElement.classList.add('jump-scroll');
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        window.setTimeout(() => {
+            document.documentElement.classList.remove('jump-scroll');
+        }, 80);
+    }
+
+    function playWelcomeSlideIn() {
+        const welcomeSection = document.getElementById('welcome-section');
+        if (!welcomeSection) return;
+
+        welcomeSection.classList.remove('welcome-slide-in');
+        void welcomeSection.offsetWidth;
+        welcomeSection.classList.add('welcome-slide-in');
+        triggerWelcomeAnimation();
+    }
+
+    function goToWelcomeWithSlide() {
+        jumpToTopWithoutPageScroll();
+        window.requestAnimationFrame(() => {
+            playWelcomeSlideIn();
+        });
+    }
+
     document.querySelectorAll('a[href^="#"]').forEach(link => {
         link.addEventListener('click', function (event) {
             const href = this.getAttribute('href');
@@ -105,29 +130,20 @@ document.addEventListener('DOMContentLoaded', async function () {
             event.preventDefault();
 
             closeResponsiveNavbarIfOpen(() => {
-                smoothScrollTo(targetElement);
-                history.replaceState(null, '', window.location.pathname + window.location.search);
-
                 if (href === '#welcome-section') {
-                    triggerWelcomeAnimation();
+                    goToWelcomeWithSlide();
+                } else {
+                    smoothScrollTo(targetElement);
                 }
+
+                history.replaceState(null, '', window.location.pathname + window.location.search);
             });
         });
     });
 
-    document.getElementById('welcome-link').addEventListener('click', function () {
-        smoothScrollTo(document.getElementById('welcome-section'));
-        triggerWelcomeAnimation();
-    });
-
     document.getElementById('brand-link').addEventListener('click', function (event) {
         event.preventDefault();
-        const welcomeSection = document.getElementById('welcome-section');
-        closeResponsiveNavbarIfOpen(() => {
-            smoothScrollTo(welcomeSection, { instant: true });
-            window.scrollTo({ top: 0, behavior: 'auto' });
-            triggerWelcomeAnimation();
-        });
+        closeResponsiveNavbarIfOpen(goToWelcomeWithSlide);
     });
 
     const downArrow = document.getElementById('down-arrow');
@@ -203,8 +219,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     const rocketBtn = document.getElementById('rocket-btn');
     rocketBtn.addEventListener('click', function () {
-        const welcomeSection = document.getElementById('welcome-section');
-        smoothScrollTo(welcomeSection);
+        goToWelcomeWithSlide();
     });
 
     const inputs = document.querySelectorAll('.form-control');
