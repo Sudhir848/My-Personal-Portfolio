@@ -18,7 +18,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         const navbar = document.getElementById('navbar');
         const navbarHeight = navbar ? Math.ceil(navbar.getBoundingClientRect().height) : 0;
         const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
-        const extraGap = viewportWidth < 768 ? 12 : 10;
+        const extraGap = viewportWidth <= 420 ? 34 : viewportWidth < 768 ? 30 : 28;
+        //                              phone        tablet/mobile       laptop/desktop
 
         return navbarHeight + extraGap;
     }
