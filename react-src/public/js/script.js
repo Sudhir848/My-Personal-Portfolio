@@ -264,6 +264,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 var title = tile.getAttribute('data-title');
                 var link = tile.getAttribute('data-link');
                 var siteLink = tile.getAttribute('data-site-link');
+                var imageAlt = tile.getAttribute('data-image-alt') || (title ? `${title} project visual` : "Project visual");
 
                 var descriptionEncoded = tile.getAttribute('data-description-enc') || "";
                 var description = decodeURIComponent(descriptionEncoded);
@@ -272,23 +273,32 @@ document.addEventListener('DOMContentLoaded', async function () {
                 modal.classList.add("show");
                 modal.setAttribute("aria-hidden", "false");
                 modalImg.src = imgSrc;
-                modalImg.alt = title ? `${title} project screenshot` : "Project screenshot";
+                modalImg.alt = imageAlt;
                 modalTitle.textContent = title;
-                modalDescription.innerHTML = window.DOMPurify
-                    ? window.DOMPurify.sanitize(description)
-                    : "";
+                if (window.DOMPurify) {
+                    modalDescription.innerHTML = window.DOMPurify.sanitize(description);
+                } else {
+                    modalDescription.textContent = description.replace(/<[^>]*>/g, ' ');
+                }
 
-                visitSourceBtn.onclick = function () {
-                    if (link) window.open(link, '_blank');
+                if (link) {
+                    visitSourceBtn.style.display = 'inline-flex';
+                    visitSourceBtn.onclick = function () {
+                        window.open(link, '_blank', 'noopener,noreferrer');
+                    };
+                } else {
+                    visitSourceBtn.style.display = 'none';
+                    visitSourceBtn.onclick = null;
                 }
 
                 if (siteLink) {
-                    visitSiteBtn.style.display = 'block';
+                    visitSiteBtn.style.display = 'inline-flex';
                     visitSiteBtn.onclick = function () {
-                        window.open(siteLink, '_blank');
+                        window.open(siteLink, '_blank', 'noopener,noreferrer');
                     };
                 } else {
                     visitSiteBtn.style.display = 'none';
+                    visitSiteBtn.onclick = null;
                 }
 
                 if (siteLink && link) {
@@ -297,15 +307,20 @@ document.addEventListener('DOMContentLoaded', async function () {
                     orText.style.display = 'none';
                 }
 
+                const modalActions = document.querySelector('.modal-actions');
+                if (modalActions) {
+                    modalActions.style.display = (siteLink || link) ? 'flex' : 'none';
+                }
+
                 if (modalScrollPositions[title]) {
                     document.querySelector('.modal-scroll-container').scrollTop = modalScrollPositions[title];
                 } else {
                     document.querySelector('.modal-scroll-container').scrollTop = 0;
                 }
 
-                    document.body.style.overflow = 'hidden';
-                    span.focus();
-                }
+                document.body.style.overflow = 'hidden';
+                requestAnimationFrame(() => span.focus({ preventScroll: true }));
+            }
 
                 tile.addEventListener('click', event => {
                     openProjectModal(tile, event);
@@ -634,21 +649,33 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         const catSet = new Set();
         projects.forEach(p => (p.categories || []).forEach(c => catSet.add(c)));
-        const categories = Array.from(catSet).sort();
 
         const labelMap = {
-            "ai-ml": "AI / ML / Robotics",
-            "game-dev": "Game Development",
-            "web-dev": "Web Design",
-            cybersecurity: "Cybersecurity"
+            all: "All Projects",
+            cybersecurity: "Cybersecurity",
+            "network-systems": "Networking / Systems",
+            "ai-ml": "AI / ML / Data",
+            database: "Databases",
+            "web-dev": "Web / Frontend",
+            "systems-cpp": "C++ / Systems",
+            "game-dev": "Games / UI",
+            robotics: "Robotics"
         };
 
-        select.innerHTML =
-            `<option value="" selected></option>` +
-            categories.map(c => {
-                const label = labelMap[c] || c;
-                return `<option value="${c}">${label}</option>`;
-            }).join('');
+        const categoryOrder = ["cybersecurity", "network-systems", "ai-ml", "database", "web-dev", "systems-cpp", "game-dev", "robotics"];
+        const categories = Array.from(catSet).sort((a, b) => {
+            const ai = categoryOrder.indexOf(a);
+            const bi = categoryOrder.indexOf(b);
+            if (ai === -1 && bi === -1) return a.localeCompare(b);
+            if (ai === -1) return 1;
+            if (bi === -1) return -1;
+            return ai - bi;
+        });
+
+        select.innerHTML = `<option value="all">${labelMap.all}</option>` + categories.map(c => {
+            const label = labelMap[c] || c;
+            return `<option value="${c}">${label}</option>`;
+        }).join('');
 
         function escapeAttr(str) {
             return String(str)
@@ -687,6 +714,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     data-title="${escapeAttr(title)}"
                     data-link="${escapeAttr(source)}"
                     data-site-link="${escapeAttr(demo)}"
+                    data-image-alt="${escapeAttr(alt)}"
                     data-description-enc="${descEnc}">
                     <div class="project-image">
                         ${imageBlock}
@@ -706,7 +734,9 @@ document.addEventListener('DOMContentLoaded', async function () {
                 return;
             }
             
-            const filtered = projects.filter(p => (p.categories || []).includes(filter));
+            const filtered = filter === "all"
+                ? projects
+                : projects.filter(p => (p.categories || []).includes(filter));
 
             container.innerHTML = filtered.map(tileHtml).join('');
             // applyThumbAspectRatios();
@@ -734,7 +764,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         select.addEventListener('change', function () {
             render(this.value);
         });
-        select.value = "";
-        render("");
+        const defaultCategory = "all";
+        select.value = defaultCategory;
+        render(defaultCategory);
     }
 });
