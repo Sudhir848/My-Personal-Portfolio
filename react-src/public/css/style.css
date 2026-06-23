@@ -115,6 +115,7 @@ img, svg {
 
 #navbar .container {
     max-width: 1120px;
+    min-width: 0;
 }
 
 #navbar .navbar-brand {
@@ -127,6 +128,8 @@ img, svg {
     gap: 10px;
     padding: 10px 14px;
     border-radius: 999px;
+    min-width: 0;
+    white-space: nowrap;
 }
 
 .navbar-logo {
@@ -149,6 +152,7 @@ img, svg {
     border-radius: 999px;
     padding: 10px 14px;
     position: relative;
+    white-space: nowrap;
 }
 
 #navbar .nav-link:hover,
@@ -816,15 +820,11 @@ section h2::after {
     margin-bottom: 8px;
 }
 
-/* Medium screens: 2-column layout */
+/* Keep tablet structure aligned with laptop: two-column cards until phone. */
 @media (max-width: 1180px) {
     .experience-timeline {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         width: min(980px, 100%);
-    }
-
-    .experience-card:first-child {
-        grid-column: span 2;
     }
 }
 
@@ -833,7 +833,7 @@ section h2::after {
     justify-content: center;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 767.98px) {
     .experience-timeline {
         grid-template-columns: 1fr;
         width: min(720px, 100%);
@@ -904,7 +904,7 @@ section h2::after {
     justify-self: center;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 767.98px) {
     .experience-timeline > .experience-card:last-child:nth-child(odd) {
         grid-column: auto;
         width: 100%;
@@ -1211,7 +1211,7 @@ section h2::after {
     line-height: 1.5;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 767.98px) {
     .academic-degree-grid,
     .earlier-education-grid {
         grid-template-columns: 1fr;
@@ -1219,7 +1219,7 @@ section h2::after {
     }
 }
 
-@media (max-width: 680px) {
+@media (max-width: 575.98px) {
     .academic-card,
     .earlier-education {
         text-align: center;
@@ -1799,7 +1799,7 @@ footer p {
     outline-offset: 4px;
 }
 
-@media (max-width: 980px) {
+@media (max-width: 767.98px) {
     .modal-content {
         width: min(760px, 96vw);
         max-height: 90vh;
@@ -1891,12 +1891,70 @@ footer p {
     }
 }
 
-@media (max-width: 991px) {
+@media (max-width: 1180px) and (min-width: 768px) {
+    #navbar {
+        width: calc(100% - 20px);
+        padding: 0 8px;
+    }
+
+    #navbar .container {
+        max-width: 100%;
+        padding-left: 6px;
+        padding-right: 6px;
+    }
+
+    #navbar .navbar-brand {
+        gap: 8px;
+        padding: 8px 8px;
+        font-size: clamp(0.64rem, 1.25vw, 0.82rem);
+        letter-spacing: 0.055em;
+    }
+
+    .navbar-logo {
+        width: 30px;
+        height: 30px;
+    }
+
+    #navbar .navbar-nav {
+        align-items: center;
+    }
+
+    #navbar .nav-item {
+        margin-left: 0.1rem !important;
+        margin-right: 0.1rem !important;
+    }
+
+    #navbar .nav-link {
+        padding: 8px 7px;
+        font-size: clamp(0.58rem, 1.05vw, 0.72rem);
+        letter-spacing: 0.075em;
+    }
+}
+
+@media (max-width: 991px) and (min-width: 768px) {
+    main, footer {
+        width: min(100% - 20px, 1180px);
+    }
+
+    section {
+        scroll-margin-top: 110px;
+    }
+}
+
+@media (max-width: 767.98px) {
     #navbar {
         top: 10px;
         width: calc(100% - 20px);
         border-radius: 26px;
         padding: 8px 10px;
+    }
+
+    #navbar .navbar-brand {
+        max-width: calc(100vw - 106px);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 0.76rem;
+        letter-spacing: 0.06em;
     }
 
     #navbar .navbar-collapse {
@@ -1918,7 +1976,7 @@ footer p {
     }
 
     .skills-list {
-        grid-template-columns: repeat(5, minmax(64px, 1fr));
+        grid-template-columns: repeat(3, minmax(64px, 1fr));
     }
 
     .skills-summary-panel {
@@ -1927,7 +1985,7 @@ footer p {
     }
 
     .projects-container {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: 1fr;
     }
 }
 
@@ -1941,7 +1999,7 @@ footer p {
     }
 }
 
-@media (max-width: 680px) {
+@media (max-width: 575.98px) {
     section {
         margin: 18px 0;
         border-radius: 24px;
