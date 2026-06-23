@@ -365,6 +365,13 @@ html.jump-scroll {
     text-shadow: 0 18px 70px rgba(124, 58, 237, 0.28);
 }
 
+@media (max-width: 575.98px) {
+    #welcome-name {
+        word-spacing: 0.03em;
+        letter-spacing: -0.045em;
+    }
+}
+
 #welcome-name .tw-text {
     white-space: pre-wrap;
 }
