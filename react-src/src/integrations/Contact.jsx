@@ -161,50 +161,23 @@ export default function Contact() {
     <div className="mx-auto" style={{ maxWidth: 800 }}>
       {/* Success panel */}
       {status === "sent" && (
-        <div
-          style={{
-            maxWidth: 720,
-            margin: "0 auto 14px",
-            background: "rgba(255,255,255,0.92)",
-            borderRadius: 14,
-            padding: "14px 16px",
-            boxShadow: "0 16px 50px rgba(0,0,0,0.30)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: 12,
-            backdropFilter: "blur(8px)",
-            WebkitBackdropFilter: "blur(8px)",
-            border: "1px solid rgba(15,23,42,0.10)",
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <span
-              style={{
-                width: 34,
-                height: 34,
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                borderRadius: 999,
-                background: "rgba(34,197,94,0.18)",
-                fontSize: 18,
-              }}
-            >
+        <div className="contact-success-panel">
+          <div className="contact-success-copy">
+            <span className="contact-success-icon">
               ✅
             </span>
 
-            <div style={{ lineHeight: 1.2 }}>
-              <div style={{ color: "#0f172a", fontWeight: 800 }}>
+            <div className="contact-success-text">
+              <div className="contact-success-title">
                 Sent successfully!
               </div>
-              <div style={{ fontWeight: 500, color: "#334155", fontSize: 14 }}>
+              <div className="contact-success-subtitle">
                 Thanks for your message! I'll respond as soon as I can.
               </div>
             </div>
           </div>
 
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <div className="contact-success-actions">
             <button
               type="button"
               className="btn btn-info"
