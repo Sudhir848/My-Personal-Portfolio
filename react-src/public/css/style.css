@@ -172,6 +172,71 @@ img, svg {
     padding: 8px 10px;
 }
 
+/* Remove browser/Bootstrap click focus rings while keeping layout unchanged. */
+html {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button,
+a,
+[role="button"],
+.navbar-toggler,
+.project-tile,
+.resume-button,
+.academic-certificate-btn,
+.social-icon,
+.rocket-btn,
+.close-modal,
+#visitSiteBtn,
+#visitSourceBtn,
+#projectCategory,
+.form-control {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:focus,
+a:focus,
+[role="button"]:focus,
+.navbar-toggler:focus,
+.project-tile:focus,
+.resume-button:focus,
+.academic-certificate-btn:focus,
+.social-icon:focus,
+.rocket-btn:focus,
+.close-modal:focus,
+#visitSiteBtn:focus,
+#visitSourceBtn:focus,
+#projectCategory:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Keep form focus readable without drawing an outer glow/ring. */
+.form-control:focus,
+#projectCategory:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Do not show focus rings for mouse/touch clicks on modern browsers. */
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible),
+[role="button"]:focus:not(:focus-visible),
+.navbar-toggler:focus:not(:focus-visible),
+.project-tile:focus:not(:focus-visible),
+.resume-button:focus:not(:focus-visible),
+.academic-certificate-btn:focus:not(:focus-visible),
+.social-icon:focus:not(:focus-visible),
+.rocket-btn:focus:not(:focus-visible),
+.close-modal:focus:not(:focus-visible),
+#visitSiteBtn:focus:not(:focus-visible),
+#visitSourceBtn:focus:not(:focus-visible),
+#projectCategory:focus:not(:focus-visible),
+.form-control:focus:not(:focus-visible) {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
 section {
     position: relative;
     isolation: isolate;
@@ -267,9 +332,14 @@ section h2::after {
     font-size: clamp(3.2rem, 6.8vw, 6.4rem);
     line-height: 0.95;
     font-weight: 950;
-    letter-spacing: -0.075em;
+    letter-spacing: -0.035em;
+    word-spacing: 0.12em;
     white-space: nowrap;
     text-shadow: 0 18px 70px rgba(124, 58, 237, 0.28);
+}
+
+#welcome-name .tw-text {
+    white-space: pre-wrap;
 }
 
 #welcome-jobtitle {
@@ -2014,7 +2084,7 @@ footer p {
         font-size: clamp(3rem, 13vw, 5.8rem);
         white-space: normal;
         line-height: 0.92;
-        letter-spacing: -0.065em;
+        letter-spacing: -0.03em;
     }
 
     .skills-list {
@@ -2106,5 +2176,742 @@ footer p {
 
     .modal-actions {
         padding: 16px;
+    }
+}
+
+/* === Responsive hardening v2: laptop/tablet structure, phone stacks === */
+:root {
+    --page-gutter: clamp(10px, 2vw, 16px);
+    --section-pad-y: clamp(64px, 8vw, 112px);
+    --section-pad-x: clamp(14px, 4vw, 56px);
+}
+
+html,
+body {
+    max-width: 100%;
+    overflow-x: clip;
+}
+
+main,
+footer,
+section,
+#navbar,
+#navbar .container,
+.about-content,
+.skills-icons-container,
+.skills-chip-panel,
+.skills-list,
+.experience-timeline,
+.experience-card,
+.academic-degree-grid,
+.academic-card,
+.earlier-education,
+.earlier-education-grid,
+.earlier-education-card,
+.projects-filter,
+.projects-container,
+.project-tile,
+#contact > div.mx-auto,
+#contact form#contact-form,
+form,
+.modal-content,
+.modal-layout,
+.modal-description,
+.resume-button-group {
+    min-width: 0;
+}
+
+section {
+    padding-left: var(--section-pad-x);
+    padding-right: var(--section-pad-x);
+}
+
+h1,
+h2,
+h3,
+p,
+li,
+a,
+span,
+button,
+.form-control {
+    overflow-wrap: anywhere;
+}
+
+#welcome-name,
+#about-title,
+#skills-title,
+#experience h2,
+#academic-foundation h2,
+#projects h2,
+.resume-title,
+#contact-title {
+    text-wrap: balance;
+}
+
+/* Tablet and smaller laptops: preserve desktop/laptop structure, only compact spacing. */
+@media (min-width: 768px) and (max-width: 1180px) {
+    main,
+    footer {
+        width: min(100% - 20px, 1180px);
+    }
+
+    section {
+        margin: 22px 0;
+        padding-left: clamp(18px, 3vw, 34px);
+        padding-right: clamp(18px, 3vw, 34px);
+    }
+
+    #welcome-section {
+        min-height: min(760px, 100svh);
+        padding-top: 128px;
+        padding-bottom: 80px;
+    }
+
+    #welcome-name {
+        max-width: 100%;
+        font-size: clamp(4.2rem, 10vw, 7.4rem);
+        line-height: 0.88;
+        white-space: normal;
+    }
+
+    #welcome-jobtitle {
+        max-width: min(780px, 92%);
+    }
+
+    .about-content {
+        width: min(980px, 100%);
+        grid-template-columns: minmax(150px, 190px) minmax(0, 1fr);
+        gap: clamp(20px, 3vw, 34px);
+        padding: clamp(20px, 3vw, 30px);
+    }
+
+    .profile-pic-container {
+        width: clamp(144px, 18vw, 176px);
+        height: clamp(144px, 18vw, 176px);
+    }
+
+    .skills-icons-container,
+    .skills-chip-panel {
+        width: min(980px, 100%);
+    }
+
+    .skills-list {
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        gap: clamp(8px, 1.2vw, 14px);
+        padding: clamp(14px, 2.2vw, 24px);
+    }
+
+    .icon-container {
+        min-height: clamp(72px, 9vw, 92px);
+        border-radius: clamp(16px, 2vw, 22px);
+    }
+
+    .icon-container img,
+    .icon-container svg {
+        max-width: clamp(42px, 6vw, 58px);
+        max-height: clamp(42px, 6vw, 58px);
+    }
+
+    .experience-timeline,
+    .academic-degree-grid,
+    .earlier-education-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .experience-timeline {
+        width: min(1040px, 100%);
+        gap: clamp(18px, 2vw, 24px);
+    }
+
+    .experience-card,
+    .academic-card,
+    .earlier-education-card {
+        padding: clamp(20px, 2.4vw, 28px);
+    }
+
+    .experience-top,
+    .academic-top,
+    .earlier-education-top {
+        grid-template-columns: clamp(58px, 8vw, 76px) minmax(0, 1fr);
+        gap: clamp(14px, 2vw, 18px);
+    }
+
+    .experience-logo-wrap,
+    .academic-logo-wrap,
+    .academic-logo-wrap.compact {
+        width: clamp(56px, 7vw, 68px);
+        height: clamp(56px, 7vw, 68px);
+    }
+
+    .experience-logo,
+    .academic-logo-wrap.compact .academic-logo {
+        width: clamp(44px, 6vw, 54px);
+        height: clamp(44px, 6vw, 54px);
+    }
+
+    .academic-logo {
+        width: clamp(50px, 6.5vw, 64px);
+        height: clamp(50px, 6.5vw, 64px);
+    }
+
+    .academic-stats {
+        justify-content: flex-start;
+    }
+
+    .academic-stat {
+        white-space: normal;
+        text-align: center;
+    }
+
+    .earlier-education-details {
+        margin-left: calc(clamp(58px, 8vw, 76px) + clamp(14px, 2vw, 18px));
+    }
+
+    .projects-container {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: clamp(16px, 2vw, 22px);
+    }
+
+    .project-tile,
+    .project-image {
+        min-height: clamp(210px, 24vw, 238px);
+    }
+
+    .text-overlay,
+    .overlay .text {
+        font-size: clamp(0.78rem, 1.35vw, 0.96rem);
+        padding: clamp(10px, 1.6vw, 14px);
+    }
+
+    .resume-button-group,
+    .modal-actions,
+    .button-container {
+        flex-direction: row;
+    }
+
+    .resume-button,
+    #visitSourceBtn,
+    #visitSiteBtn {
+        width: auto;
+    }
+
+    #contact > div.mx-auto,
+    #contact form#contact-form,
+    form {
+        width: min(820px, 100%) !important;
+    }
+
+    .modal-content {
+        width: min(1040px, 94vw);
+    }
+
+    .modal-layout {
+        grid-template-columns: minmax(220px, 0.82fr) minmax(0, 1.18fr);
+    }
+}
+
+/* Tablet portrait/nav safety: keep the expanded navigation from wrapping. */
+@media (min-width: 768px) and (max-width: 940px) {
+    #navbar .navbar-brand {
+        flex: 0 1 auto;
+        max-width: 190px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    #navbar .navbar-collapse {
+        min-width: 0;
+    }
+
+    #navbar .navbar-nav {
+        min-width: 0;
+        flex-wrap: nowrap;
+    }
+
+    #navbar .nav-link {
+        padding-left: clamp(5px, 0.75vw, 8px);
+        padding-right: clamp(5px, 0.75vw, 8px);
+        font-size: clamp(0.54rem, 0.92vw, 0.68rem);
+        letter-spacing: 0.06em;
+    }
+
+    .projects-filter {
+        width: min(820px, 100%);
+    }
+
+    .experience-heading h3,
+    .academic-heading h3,
+    .earlier-education-card h3 {
+        font-size: clamp(0.98rem, 1.7vw, 1.18rem);
+    }
+
+    .experience-org,
+    .academic-school {
+        font-size: clamp(0.92rem, 1.55vw, 1.08rem);
+    }
+}
+
+/* Phones: one content card per line and simplified navigation. */
+@media (max-width: 767.98px) {
+    :root {
+        --radius-lg: 24px;
+        --radius-md: 18px;
+        --nav-height: 64px;
+    }
+
+    main,
+    footer {
+        width: min(100% - 20px, 1180px);
+    }
+
+    section {
+        scroll-margin-top: 104px;
+        margin: 18px 0;
+        padding: clamp(56px, 10vw, 72px) clamp(14px, 5vw, 22px);
+        border-radius: 24px;
+    }
+
+    #navbar {
+        top: 10px;
+        width: calc(100% - 20px);
+        min-height: 64px;
+        border-radius: 26px;
+        padding: 8px 10px;
+    }
+
+    #navbar.shrink {
+        min-height: 58px;
+    }
+
+    #navbar .container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    #navbar .navbar-brand {
+        max-width: calc(100vw - 108px);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: clamp(0.68rem, 3.1vw, 0.8rem);
+        letter-spacing: 0.055em;
+        padding: 8px 6px;
+    }
+
+    .navbar-logo {
+        width: 30px;
+        height: 30px;
+    }
+
+    #navbar .navbar-collapse {
+        padding: 10px 0 4px;
+    }
+
+    #navbar .navbar-nav {
+        gap: 4px;
+    }
+
+    #navbar .nav-link {
+        width: 100%;
+        text-align: center;
+        margin: 0;
+        padding: 10px 12px;
+    }
+
+    #welcome-section {
+        min-height: 100svh;
+        padding-top: 132px;
+        padding-bottom: 76px;
+    }
+
+    #welcome-name {
+        max-width: 96vw;
+        font-size: clamp(3rem, 15vw, 5.8rem);
+        white-space: normal;
+        line-height: 0.92;
+        letter-spacing: -0.03em;
+    }
+
+    #welcome-jobtitle {
+        max-width: 92vw;
+        font-size: clamp(1rem, 4.2vw, 1.35rem);
+    }
+
+    .about-content,
+    .experience-timeline,
+    .academic-degree-grid,
+    .earlier-education-grid,
+    .projects-container,
+    .modal-layout {
+        grid-template-columns: 1fr;
+        width: min(720px, 100%);
+    }
+
+    .about-content,
+    .experience-card,
+    .academic-card,
+    .earlier-education,
+    .earlier-education-card {
+        text-align: center;
+    }
+
+    .about-content {
+        padding: clamp(18px, 5vw, 24px);
+    }
+
+    .profile-pic-container {
+        width: clamp(136px, 42vw, 168px);
+        height: clamp(136px, 42vw, 168px);
+    }
+
+    .skills-icons-container,
+    .skills-chip-panel {
+        width: min(720px, 100%);
+    }
+
+    .skills-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        padding: 14px;
+    }
+
+    .icon-container {
+        min-height: clamp(74px, 22vw, 88px);
+        border-radius: 18px;
+    }
+
+    .icon-container img,
+    .icon-container svg {
+        max-width: clamp(42px, 13vw, 54px);
+        max-height: clamp(42px, 13vw, 54px);
+    }
+
+    .skills-chip-panel {
+        padding: 14px;
+    }
+
+    .skills-chip-group {
+        justify-content: center;
+    }
+
+    .experience-card,
+    .academic-card,
+    .earlier-education-card {
+        align-items: center;
+        padding: clamp(18px, 5vw, 24px);
+    }
+
+    .experience-header,
+    .academic-details {
+        align-items: center;
+        text-align: center;
+    }
+
+    .experience-top,
+    .academic-top,
+    .earlier-education-top {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+    }
+
+    .experience-timeline > .experience-card:last-child:nth-child(odd) {
+        grid-column: auto;
+        width: 100%;
+        justify-self: stretch;
+    }
+
+    .experience-bullets {
+        align-self: stretch;
+        text-align: left;
+    }
+
+    .academic-focus {
+        text-align: center;
+    }
+
+    .academic-stats,
+    .earlier-education-card .academic-stats,
+    .earlier-education-card .compact-stats {
+        justify-content: center;
+    }
+
+    .academic-stat {
+        white-space: normal;
+        text-align: center;
+    }
+
+    .earlier-education {
+        padding: 8px;
+    }
+
+    .earlier-education-details {
+        margin-left: 0;
+        align-items: center;
+    }
+
+    .projects-filter {
+        width: min(720px, 100%);
+        border-radius: 24px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .projects-filter label,
+    .projects-count {
+        text-align: center;
+    }
+
+    #projectCategory {
+        width: 100%;
+    }
+
+    .project-tile,
+    .project-image {
+        min-height: clamp(220px, 60vw, 310px);
+    }
+
+    .resume-button-group,
+    .button-container,
+    .modal-actions {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .resume-button,
+    #visitSourceBtn,
+    #visitSiteBtn,
+    .modal-actions button,
+    #myModal .modal-actions button {
+        width: 100%;
+    }
+
+    #contact > div.mx-auto,
+    #contact form#contact-form,
+    form {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    form,
+    #contact form#contact-form {
+        padding: clamp(16px, 5vw, 22px) !important;
+    }
+
+    #react-social-links,
+    #social-links-container {
+        width: 100%;
+        flex-wrap: wrap;
+        border-radius: 24px;
+        gap: 10px;
+    }
+
+    .social-icon {
+        width: 46px;
+        height: 46px;
+    }
+
+    footer {
+        padding: 14px;
+    }
+
+    footer p {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .rocket-btn {
+        margin-left: 0;
+    }
+
+    .modal {
+        padding: 10px;
+        align-items: flex-start;
+        padding-top: max(10px, env(safe-area-inset-top));
+        padding-bottom: max(10px, env(safe-area-inset-bottom));
+    }
+
+    .modal-content {
+        width: 100%;
+        max-height: calc(100svh - 20px);
+        border-radius: 24px;
+    }
+
+    .modal-header {
+        padding: 18px 18px 16px;
+        gap: 14px;
+    }
+
+    #modalTitle,
+    .modal-title {
+        font-size: clamp(1.25rem, 6vw, 1.8rem);
+    }
+
+    .modal-scroll-container {
+        padding: 16px;
+    }
+
+    .modal-layout::before {
+        display: none;
+    }
+
+    .modal-image {
+        position: static;
+    }
+
+    .modal-image,
+    .modal-description {
+        border-radius: 22px;
+    }
+
+    .modal-image img {
+        max-height: 240px;
+        border-radius: 16px;
+    }
+
+    .modal-description {
+        padding: 18px;
+        line-height: 1.68;
+    }
+
+    .modal-actions {
+        padding: 16px;
+    }
+}
+
+/* Very small phones: avoid squeezed grids and long labels. */
+@media (max-width: 420px) {
+    main,
+    footer,
+    #navbar {
+        width: calc(100% - 16px);
+    }
+
+    #navbar .navbar-brand {
+        max-width: calc(100vw - 96px);
+        font-size: 0.66rem;
+    }
+
+    .skills-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .academic-stat,
+    .skills-chip-group span {
+        width: 100%;
+    }
+
+    .project-tile,
+    .project-image {
+        min-height: 220px;
+    }
+
+    .overlay {
+        padding: 12px;
+    }
+
+    .text-overlay,
+    .overlay .text {
+        padding: 12px;
+        font-size: 0.88rem;
+    }
+
+    .form-label {
+        max-width: calc(100% - 32px);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+
+/* Final override: remove all circular/outline focus indicators caused by clicks or keyboard focus. */
+:where(a, button, [role="button"], .navbar-toggler, .project-tile, .resume-button, .academic-certificate-btn, .social-icon, .rocket-btn, .close-modal, #visitSiteBtn, #visitSourceBtn, #projectCategory):focus,
+:where(a, button, [role="button"], .navbar-toggler, .project-tile, .resume-button, .academic-certificate-btn, .social-icon, .rocket-btn, .close-modal, #visitSiteBtn, #visitSourceBtn, #projectCategory):focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.form-control:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: rgba(34,211,238,0.60) !important;
+}
+
+
+/* === Responsive hardening v5: fixed-header anchor offsets and mobile menu safety === */
+:root {
+    --fixed-nav-offset: 112px;
+}
+
+html {
+    scroll-padding-top: var(--fixed-nav-offset);
+}
+
+section,
+#welcome-section,
+#about,
+#skills,
+#experience,
+#academic-foundation,
+#projects,
+#resume,
+#contact {
+    scroll-margin-top: var(--fixed-nav-offset) !important;
+}
+
+#navbar .navbar-collapse {
+    max-height: calc(100svh - 92px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+@media (min-width: 768px) {
+    #navbar .navbar-collapse {
+        max-height: none;
+        overflow: visible;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1180px) {
+    :root {
+        --fixed-nav-offset: 106px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    :root {
+        --fixed-nav-offset: 106px;
+    }
+
+    #navbar .navbar-collapse.show {
+        border-top: 1px solid rgba(255,255,255,0.10);
+        margin-top: 8px;
+        padding-top: 10px;
+    }
+
+    section h2 {
+        font-size: clamp(2.1rem, 10vw, 3.35rem);
+        line-height: 1.02;
+        letter-spacing: -0.045em;
+        margin-bottom: clamp(20px, 6vw, 30px);
+    }
+
+    section h2::after {
+        margin-top: 14px;
+    }
+}
+
+@media (max-width: 420px) {
+    :root {
+        --fixed-nav-offset: 100px;
+    }
+
+    section h2 {
+        font-size: clamp(1.95rem, 11vw, 2.8rem);
     }
 }

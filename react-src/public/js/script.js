@@ -14,48 +14,103 @@ document.addEventListener('DOMContentLoaded', async function () {
     rotateObserver('projects-title');
     rotateObserver('contact-title');
 
-    function smoothScrollTo(targetElement) {
-        const startPosition = window.scrollY;
-        const endPosition = targetElement.offsetTop;
-        const distance = endPosition - startPosition;
-        const duration = 500;
-        const easing = t => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+    function getNavbarOffset() {
+        const navbar = document.getElementById('navbar');
+        const navbarHeight = navbar ? Math.ceil(navbar.getBoundingClientRect().height) : 0;
+        const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+        const extraGap = viewportWidth < 768 ? 12 : 10;
 
-        let startTime = null;
-
-        function scrollStep(currentTime) {
-            if (!startTime) startTime = currentTime;
-            const timeElapsed = currentTime - startTime;
-            const progress = Math.min(timeElapsed / duration, 1);
-            const easingProgress = easing(progress);
-
-            window.scrollTo(0, startPosition + (distance * easingProgress));
-
-            if (timeElapsed < duration) {
-                requestAnimationFrame(scrollStep);
-            } else {
-                const welcomeSection = document.getElementById('welcome-section');
-                if (welcomeSection) {
-                    welcomeSection.classList.remove('push-up');
-                }
-            }
-        }
-        requestAnimationFrame(scrollStep);
+        return navbarHeight + extraGap;
     }
+
+    function getAnchorScrollTarget(targetElement) {
+        if (!targetElement || targetElement.id === 'welcome-section') {
+            return targetElement;
+        }
+
+        const sectionHeading = targetElement.matches('section')
+            ? targetElement.querySelector(':scope > h2, h2')
+            : null;
+
+        return sectionHeading || targetElement;
+    }
+
+    function syncScrollOffsetVariable() {
+        document.documentElement.style.setProperty('--fixed-nav-offset', `${getNavbarOffset()}px`);
+    }
+
+    function smoothScrollTo(targetElement, options = {}) {
+        if (!targetElement) return;
+
+        syncScrollOffsetVariable();
+
+        const scrollTarget = getAnchorScrollTarget(targetElement);
+        const targetTop =
+            scrollTarget.getBoundingClientRect().top +
+            window.pageYOffset -
+            getNavbarOffset();
+
+        window.scrollTo({
+            top: Math.max(targetTop, 0),
+            behavior: options.instant || prefersReducedMotion() ? 'auto' : 'smooth'
+        });
+
+        const welcomeSection = document.getElementById('welcome-section');
+        if (welcomeSection) {
+            window.setTimeout(() => welcomeSection.classList.remove('push-up'), 520);
+        }
+    }
+
+    function closeResponsiveNavbarIfOpen(callback) {
+        const navbarCollapse = document.getElementById('navbarNav');
+        const toggler = document.getElementById('navbar-toggler');
+
+        if (!navbarCollapse || !navbarCollapse.classList.contains('show')) {
+            callback();
+            return;
+        }
+
+        let callbackCalled = false;
+        const runCallbackOnce = () => {
+            if (callbackCalled) return;
+            callbackCalled = true;
+            syncScrollOffsetVariable();
+            callback();
+        };
+
+        if (window.jQuery && typeof window.jQuery.fn.collapse === 'function') {
+            window.jQuery(navbarCollapse).one('hidden.bs.collapse', runCallbackOnce);
+            window.jQuery(navbarCollapse).collapse('hide');
+            window.setTimeout(runCallbackOnce, 380);
+        } else {
+            navbarCollapse.classList.remove('show');
+            if (toggler) toggler.setAttribute('aria-expanded', 'false');
+            window.setTimeout(runCallbackOnce, 0);
+        }
+    }
+
+    syncScrollOffsetVariable();
+    window.addEventListener('resize', syncScrollOffsetVariable);
+    window.addEventListener('orientationchange', () => window.setTimeout(syncScrollOffsetVariable, 250));
 
     document.querySelectorAll('a[href^="#"]').forEach(link => {
         link.addEventListener('click', function (event) {
-            event.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const targetElement = document.getElementById(targetId);
+            const href = this.getAttribute('href');
+            if (!href || href === '#') return;
 
-            if (targetElement) {
+            const targetElement = document.querySelector(href);
+            if (!targetElement) return;
+
+            event.preventDefault();
+
+            closeResponsiveNavbarIfOpen(() => {
                 smoothScrollTo(targetElement);
-                window.history.replaceState(null, null, ' ');
-                if (targetId === 'welcome-section') {
+                history.replaceState(null, '', window.location.pathname + window.location.search);
+
+                if (href === '#welcome-section') {
                     triggerWelcomeAnimation();
                 }
-            }
+            });
         });
     });
 
@@ -67,11 +122,11 @@ document.addEventListener('DOMContentLoaded', async function () {
     document.getElementById('brand-link').addEventListener('click', function (event) {
         event.preventDefault();
         const welcomeSection = document.getElementById('welcome-section');
-        document.documentElement.style.scrollBehavior = 'auto';
-        welcomeSection.scrollIntoView({ behavior: 'instant' });
-        window.scrollTo(0, 0);
-        document.documentElement.style.scrollBehavior = '';
-        triggerWelcomeAnimation();
+        closeResponsiveNavbarIfOpen(() => {
+            smoothScrollTo(welcomeSection, { instant: true });
+            window.scrollTo({ top: 0, behavior: 'auto' });
+            triggerWelcomeAnimation();
+        });
     });
 
     const downArrow = document.getElementById('down-arrow');
@@ -90,7 +145,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         let inWelcomeSection = false;
 
         sections.forEach(section => {
-            const sectionTop = section.offsetTop - 70;
+            const sectionTop = section.offsetTop - getNavbarOffset();
             const sectionHeight = section.offsetHeight;
 
             if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
@@ -138,18 +193,17 @@ document.addEventListener('DOMContentLoaded', async function () {
         contactForm.reset();
     });
 
-    window.addEventListener('DOMContentLoaded', function () {
-        if (window.location.hash === "#contact") {
-            document.documentElement.style.scrollBehavior = "auto";
-            document.getElementById('contact').scrollIntoView({ behavior: 'instant' });
-            document.documentElement.style.scrollBehavior = "";
+    if (window.location.hash) {
+        const initialTarget = document.querySelector(window.location.hash);
+        if (initialTarget) {
+            window.setTimeout(() => smoothScrollTo(initialTarget, { instant: true }), 120);
         }
-    });
+    }
 
     const rocketBtn = document.getElementById('rocket-btn');
     rocketBtn.addEventListener('click', function () {
         const welcomeSection = document.getElementById('welcome-section');
-        welcomeSection.scrollIntoView({ behavior: 'smooth' });
+        smoothScrollTo(welcomeSection);
     });
 
     const inputs = document.querySelectorAll('.form-control');
@@ -350,9 +404,8 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     document.querySelectorAll('#navbarNav .nav-link').forEach(link => {
         link.addEventListener('click', () => {
-            if (window.innerWidth < 992) {
-                document.getElementById('navbar-toggler').click();
-            }
+            const toggler = document.getElementById('navbar-toggler');
+            if (toggler) toggler.blur();
         });
     });
 
@@ -498,7 +551,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         let currentSectionId = "";
 
         sections.forEach(section => {
-            const sectionTop = section.offsetTop - 70;
+            const sectionTop = section.offsetTop - getNavbarOffset();
             const sectionHeight = section.offsetHeight;
 
             if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
