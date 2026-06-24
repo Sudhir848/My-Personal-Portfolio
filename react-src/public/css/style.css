@@ -120,13 +120,13 @@ img, svg {
 
 #navbar .navbar-brand {
     color: #ffffff;
-    letter-spacing: 0.09em;
-    font-size: 0.86rem;
+    letter-spacing: clamp(0.045em, 0.35vw, 0.09em);
+    font-size: clamp(0.78rem, 0.9vw, 0.96rem);
     font-weight: 800;
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    padding: 10px 14px;
+    gap: clamp(8px, 0.7vw, 10px);
+    padding: 10px clamp(10px, 0.9vw, 14px);
     border-radius: 999px;
     min-width: 0;
     white-space: nowrap;
@@ -146,13 +146,14 @@ img, svg {
 
 #navbar .nav-link {
     color: rgba(226, 232, 240, 0.78);
-    font-size: 0.78rem;
+    font-size: 0.86rem;
     font-weight: 800;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.035em;
     border-radius: 999px;
-    padding: 10px 14px;
+    padding: 9px 8px;
     position: relative;
     white-space: nowrap;
+    line-height: 1.1;
 }
 
 #navbar .nav-link:hover,
@@ -172,7 +173,6 @@ img, svg {
     padding: 8px 10px;
 }
 
-/* Remove browser/Bootstrap click focus rings while keeping layout unchanged. */
 html {
     -webkit-tap-highlight-color: transparent;
 }
@@ -211,14 +211,12 @@ a:focus,
     box-shadow: none !important;
 }
 
-/* Keep form focus readable without drawing an outer glow/ring. */
 .form-control:focus,
 #projectCategory:focus {
     outline: none !important;
     box-shadow: none !important;
 }
 
-/* Do not show focus rings for mouse/touch clicks on modern browsers. */
 button:focus:not(:focus-visible),
 a:focus:not(:focus-visible),
 [role="button"]:focus:not(:focus-visible),
@@ -266,9 +264,16 @@ section h2 {
     font-weight: 900;
     line-height: 0.98;
     letter-spacing: -0.025em;
-    word-spacing: 0.06em;
+    word-spacing: 0.055em;
     text-align: center;
     text-shadow: none;
+}
+
+@media (max-width: 767.98px) {
+    section h2 {
+        letter-spacing: -0.045em;
+        word-spacing: normal;
+    }
 }
 
 section h2::after {
@@ -784,8 +789,6 @@ html.jump-scroll {
 }
 
 
-/* === Experience Section === */
-
 #experience {
     min-height: auto;
     padding: clamp(72px, 8vw, 112px) clamp(18px, 4vw, 56px);
@@ -925,7 +928,6 @@ html.jump-scroll {
     margin-bottom: 8px;
 }
 
-/* Keep tablet structure aligned with laptop: two-column cards until phone. */
 @media (max-width: 1180px) {
     .experience-timeline {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -933,7 +935,6 @@ html.jump-scroll {
     }
 }
 
-/* Mobile: single column */
 .academic-stats {
     justify-content: center;
 }
@@ -996,13 +997,6 @@ html.jump-scroll {
     line-height: 1.68;
 }
 
-/* 
-   In a 2-column grid:
-   - 3 cards: 3rd centers
-   - 4 cards: 3rd and 4th align normally
-   - 5 cards: 5th centers
-   - 6 cards: 5th and 6th align normally
-*/
 .experience-timeline > .experience-card:last-child:nth-child(odd) {
     grid-column: 1 / -1;
     width: calc((100% - 24px) / 2);
@@ -2117,7 +2111,7 @@ footer p {
     }
 }
 
-@media (max-width: 1180px) and (min-width: 768px) {
+@media (max-width: 1180px) and (min-width: 992px) {
     #navbar {
         width: calc(100% - 20px);
         padding: 0 8px;
@@ -2130,10 +2124,15 @@ footer p {
     }
 
     #navbar .navbar-brand {
-        gap: 8px;
-        padding: 8px 8px;
-        font-size: clamp(0.64rem, 1.25vw, 0.82rem);
-        letter-spacing: 0.055em;
+        flex: 0 1 auto;
+        gap: 7px;
+        padding: 8px 6px;
+        font-size: 0.76rem;
+        letter-spacing: 0.03em;
+        max-width: 210px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     .navbar-logo {
@@ -2143,17 +2142,22 @@ footer p {
 
     #navbar .navbar-nav {
         align-items: center;
+        margin-left: auto;
+        gap: 1px;
+        flex-wrap: nowrap;
     }
 
     #navbar .nav-item {
-        margin-left: 0.1rem !important;
-        margin-right: 0.1rem !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
     }
 
     #navbar .nav-link {
-        padding: 8px 7px;
-        font-size: clamp(0.58rem, 1.05vw, 0.72rem);
-        letter-spacing: 0.075em;
+        padding: 8px 5px;
+        font-size: 0.82rem;
+        letter-spacing: 0.018em;
+        line-height: 1.1;
+        white-space: nowrap;
     }
 }
 
@@ -2167,30 +2171,8 @@ footer p {
     }
 }
 
+
 @media (max-width: 767.98px) {
-    #navbar {
-        top: 10px;
-        width: calc(100% - 20px);
-        border-radius: 26px;
-        padding: 8px 10px;
-    }
-
-    #navbar .navbar-brand {
-        max-width: calc(100vw - 106px);
-        overflow: hidden;
-        text-overflow: ellipsis;
-        font-size: 0.76rem;
-        letter-spacing: 0.06em;
-    }
-
-    #navbar .navbar-collapse {
-        padding: 10px 0 4px;
-    }
-
-    #navbar .nav-link {
-        text-align: center;
-        margin: 4px 0;
-    }
 
     main, footer {
         width: min(100% - 20px, 1180px);
@@ -2571,7 +2553,6 @@ button {
     }
 }
 
-/* Tablet portrait/nav safety: keep the expanded navigation from wrapping. */
 @media (min-width: 768px) and (max-width: 940px) {
     #navbar .navbar-brand {
         flex: 0 1 auto;
@@ -2612,7 +2593,6 @@ button {
     }
 }
 
-/* Phones: one content card per line and simplified navigation. */
 @media (max-width: 767.98px) {
     :root {
         --radius-lg: 24px;
@@ -2943,7 +2923,6 @@ button {
     }
 }
 
-/* Very small phones: avoid squeezed grids and long labels. */
 @media (max-width: 420px) {
     main,
     footer,
@@ -2989,7 +2968,6 @@ button {
 }
 
 
-/* Final override: remove all circular/outline focus indicators caused by clicks or keyboard focus. */
 :where(a, button, [role="button"], .navbar-toggler, .project-tile, .resume-button, .academic-certificate-btn, .social-icon, .rocket-btn, .close-modal, #visitSiteBtn, #visitSourceBtn, #projectCategory):focus,
 :where(a, button, [role="button"], .navbar-toggler, .project-tile, .resume-button, .academic-certificate-btn, .social-icon, .rocket-btn, .close-modal, #visitSiteBtn, #visitSourceBtn, #projectCategory):focus-visible {
     outline: none !important;
@@ -3002,8 +2980,6 @@ button {
     border-color: rgba(34,211,238,0.60) !important;
 }
 
-
-/* === Responsive hardening v5: fixed-header anchor offsets and mobile menu safety === */
 :root {
     --fixed-nav-offset: 112px;
 }
@@ -3073,5 +3049,172 @@ section,
 
     section h2 {
         font-size: clamp(1.95rem, 11vw, 2.8rem);
+    }
+}
+
+#navbar .navbar-nav .nav-link {
+    font-size: 0.92rem !important;
+    letter-spacing: 0.018em !important;
+    padding: 8px 7px !important;
+    line-height: 1.1;
+}
+
+@media (max-width: 1180px) and (min-width: 992px) {
+    #navbar {
+        width: calc(100% - 20px);
+        padding: 0 8px;
+    }
+
+    #navbar .container {
+        max-width: 100%;
+        padding-left: 6px;
+        padding-right: 6px;
+    }
+
+    #navbar .navbar-brand {
+        flex: 0 1 auto;
+        gap: 7px;
+        padding: 8px 6px;
+        font-size: 0.76rem;
+        letter-spacing: 0.03em;
+        max-width: 210px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .navbar-logo {
+        width: 30px;
+        height: 30px;
+    }
+
+    #navbar .navbar-nav {
+        align-items: center;
+        margin-left: auto;
+        gap: 1px;
+        flex-wrap: nowrap;
+    }
+
+    #navbar .nav-item {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    #navbar .nav-link {
+        padding: 8px 5px;
+        font-size: 0.82rem;
+        letter-spacing: 0.018em;
+        line-height: 1.1;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 991.98px) {
+    #navbar {
+        top: 10px;
+        width: calc(100% - 20px);
+        min-height: 76px;
+        border-radius: 26px;
+        padding: 8px 10px;
+        overflow: visible;
+    }
+
+    #navbar.shrink {
+        min-height: 70px;
+    }
+
+    #navbar .container {
+        position: relative;
+        max-width: 100%;
+        min-height: 54px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    #navbar .navbar-brand {
+        max-width: calc(100vw - 126px);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 0.78rem;
+        letter-spacing: 0.055em;
+    }
+
+    #navbar .navbar-toggler {
+        margin-left: auto;
+        flex: 0 0 auto;
+    }
+
+    #navbar .navbar-collapse {
+        position: absolute !important;
+        top: calc(100% + 6px);
+        right: 8px;
+        left: auto;
+        width: min(330px, calc(100vw - 44px));
+        padding: 9px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 18px;
+        background: rgba(5, 8, 22, 0.97);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.42);
+    }
+
+    #navbar .navbar-collapse:not(.show) {
+        display: none !important;
+    }
+
+    #navbar .navbar-nav {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 4px;
+        margin-left: 0 !important;
+    }
+
+    #navbar .nav-item {
+        width: 100%;
+        margin: 0 !important;
+    }
+
+    #navbar .nav-link {
+        width: 100%;
+        display: block;
+        margin: 0;
+        padding: 8px 9px;
+        text-align: center;
+        font-size: 0.74rem;
+        letter-spacing: 0.035em;
+        line-height: 1.1;
+        white-space: nowrap;
+        border-radius: 999px;
+    }
+
+    #navbar .nav-item:last-child {
+        grid-column: 1 / -1;
+        justify-self: center;
+        width: 50%;
+    }
+}
+
+@media (max-width: 575.98px) {
+    #navbar .navbar-collapse {
+        right: 0;
+        width: min(245px, calc(100vw - 44px));
+    }
+
+    #navbar .navbar-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    #navbar .nav-item:last-child {
+        width: 100%;
+    }
+
+    #navbar .nav-link {
+        padding: 7px 9px;
+        font-size: 0.76rem;
     }
 }
