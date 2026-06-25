@@ -1,6 +1,10 @@
 document.addEventListener('DOMContentLoaded', async function () {
     //displayGreeting();
 
+    // Bind navigation immediately. Do not wait for projects.json; otherwise
+    // a slow/failed fetch leaves hash links to use the browser's native jump.
+    setupPrimaryNavigation();
+
     await loadProjectsFromJson();
 
     projectsObserver();
@@ -40,6 +44,58 @@ document.addEventListener('DOMContentLoaded', async function () {
         document.documentElement.style.setProperty('--fixed-nav-offset', `${getNavbarOffset()}px`);
     }
 
+    let activeScrollAnimation = null;
+
+    function easeInOutCubic(t) {
+        return t < 0.5
+            ? 4 * t * t * t
+            : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+
+    function animateWindowScrollTo(targetTop, options = {}) {
+        const startTop = window.pageYOffset || document.documentElement.scrollTop || 0;
+        const destination = Math.max(targetTop, 0);
+        const distance = destination - startTop;
+
+        if (activeScrollAnimation) {
+            window.cancelAnimationFrame(activeScrollAnimation);
+            activeScrollAnimation = null;
+        }
+
+        // For instant jumps, keep native smooth scrolling disabled just for this call.
+        if (options.instant || prefersReducedMotion() || Math.abs(distance) < 2) {
+            document.documentElement.classList.add('native-scroll-disabled');
+            window.scrollTo(0, destination);
+            window.setTimeout(() => document.documentElement.classList.remove('native-scroll-disabled'), 80);
+            return;
+        }
+
+        // Disable CSS/native smooth behavior while our JS animation runs. Otherwise the browser
+        // smooths every animation frame and the movement can look like a direct slide/jump.
+        document.documentElement.classList.add('native-scroll-disabled');
+
+        const duration = Math.min(Math.max(Math.abs(distance) * 0.55, 850), 1600);
+        const startedAt = performance.now();
+
+        const step = (now) => {
+            const elapsed = now - startedAt;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = easeInOutCubic(progress);
+
+            window.scrollTo(0, startTop + distance * eased);
+
+            if (progress < 1) {
+                activeScrollAnimation = window.requestAnimationFrame(step);
+            } else {
+                activeScrollAnimation = null;
+                window.scrollTo(0, destination);
+                window.setTimeout(() => document.documentElement.classList.remove('native-scroll-disabled'), 80);
+            }
+        };
+
+        activeScrollAnimation = window.requestAnimationFrame(step);
+    }
+
     function smoothScrollTo(targetElement, options = {}) {
         if (!targetElement) return;
 
@@ -51,10 +107,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             window.pageYOffset -
             getNavbarOffset();
 
-        window.scrollTo({
-            top: Math.max(targetTop, 0),
-            behavior: options.instant || prefersReducedMotion() ? 'auto' : 'smooth'
-        });
+        animateWindowScrollTo(targetTop, options);
 
         const welcomeSection = document.getElementById('welcome-section');
         if (welcomeSection) {
@@ -95,10 +148,15 @@ document.addEventListener('DOMContentLoaded', async function () {
     window.addEventListener('orientationchange', () => window.setTimeout(syncScrollOffsetVariable, 250));
 
     function jumpToTopWithoutPageScroll() {
-        document.documentElement.classList.add('jump-scroll');
-        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        if (activeScrollAnimation) {
+            window.cancelAnimationFrame(activeScrollAnimation);
+            activeScrollAnimation = null;
+        }
+
+        document.documentElement.classList.add('jump-scroll', 'native-scroll-disabled');
+        window.scrollTo(0, 0);
         window.setTimeout(() => {
-            document.documentElement.classList.remove('jump-scroll');
+            document.documentElement.classList.remove('jump-scroll', 'native-scroll-disabled');
         }, 80);
     }
 
@@ -119,32 +177,63 @@ document.addEventListener('DOMContentLoaded', async function () {
         });
     }
 
-    document.querySelectorAll('a[href^="#"]').forEach(link => {
-        link.addEventListener('click', function (event) {
-            const href = this.getAttribute('href');
-            if (!href || href === '#') return;
+    function handleSectionNavigation(event, clickedLink) {
+        const link = clickedLink || event.currentTarget;
+        const href = link && link.getAttribute('href');
+        if (!href || href === '#') return;
 
-            const targetElement = document.querySelector(href);
-            if (!targetElement) return;
+        const isBrandLink = link.matches('#brand-link, .navbar-brand');
+        const isWelcomeLink = href === '#welcome-section';
+        const isLocalSectionLink = href.startsWith('#');
 
-            event.preventDefault();
+        // The brand currently points at the site URL, not #welcome-section. Treat it as Welcome.
+        if (!isLocalSectionLink && !isBrandLink) return;
 
-            closeResponsiveNavbarIfOpen(() => {
-                if (href === '#welcome-section') {
-                    goToWelcomeWithSlide();
-                } else {
-                    smoothScrollTo(targetElement);
-                }
+        const targetElement = isBrandLink
+            ? document.getElementById('welcome-section')
+            : document.querySelector(href);
+        if (!targetElement) return;
 
-                history.replaceState(null, '', window.location.pathname + window.location.search);
-            });
-        });
-    });
-
-    document.getElementById('brand-link').addEventListener('click', function (event) {
         event.preventDefault();
-        closeResponsiveNavbarIfOpen(goToWelcomeWithSlide);
-    });
+        event.stopPropagation();
+        if (typeof event.stopImmediatePropagation === 'function') {
+            event.stopImmediatePropagation();
+        }
+
+        closeResponsiveNavbarIfOpen(() => {
+            // Keep the direct top jump + welcome slide ONLY for Welcome and the navbar brand.
+            if (isWelcomeLink || isBrandLink) {
+                goToWelcomeWithSlide();
+            } else {
+                // All other navbar links use an explicit scroll animation.
+                smoothScrollTo(targetElement);
+            }
+
+            history.replaceState(null, '', window.location.pathname + window.location.search);
+        });
+    }
+
+    function setupPrimaryNavigation() {
+        if (setupPrimaryNavigation.bound) return;
+        setupPrimaryNavigation.bound = true;
+
+        const navbar = document.getElementById('navbar');
+        if (!navbar) return;
+
+        const brandLink = navbar.querySelector('#brand-link, .navbar-brand');
+        if (brandLink && !brandLink.id) {
+            brandLink.id = 'brand-link';
+        }
+
+        // Capture the click at the navbar level so browser hash navigation and any other
+        // bubbling click handler cannot run first and jump/slide directly to the section.
+        navbar.addEventListener('click', function (event) {
+            const clickedLink = event.target.closest('#navbarNav .nav-link[href^="#"], #brand-link, .navbar-brand');
+            if (!clickedLink || !navbar.contains(clickedLink)) return;
+
+            handleSectionNavigation(event, clickedLink);
+        }, true);
+    }
 
     const downArrow = document.getElementById('down-arrow');
     downArrow.addEventListener('click', function () {

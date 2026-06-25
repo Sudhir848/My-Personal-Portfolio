@@ -1,6 +1,10 @@
 document.addEventListener('DOMContentLoaded', async function () {
     //displayGreeting();
 
+    // Bind navigation immediately. Do not wait for projects.json; otherwise
+    // a slow/failed fetch leaves hash links to use the browser's native jump.
+    setupPrimaryNavigation();
+
     await loadProjectsFromJson();
 
     projectsObserver();
@@ -43,36 +47,50 @@ document.addEventListener('DOMContentLoaded', async function () {
         requestAnimationFrame(scrollStep);
     }
 
-    document.querySelectorAll('a[href^="#"]').forEach(link => {
-        link.addEventListener('click', function (event) {
-            event.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const targetElement = document.getElementById(targetId);
-
-            if (targetElement) {
-                smoothScrollTo(targetElement);
-                window.history.replaceState(null, null, ' ');
-                if (targetId === 'welcome-section') {
-                    triggerWelcomeAnimation();
-                }
-            }
-        });
-    });
-
-    document.getElementById('welcome-link').addEventListener('click', function () {
-        smoothScrollTo(document.getElementById('welcome-section'));
-        triggerWelcomeAnimation();
-    });
-
-    document.getElementById('brand-link').addEventListener('click', function (event) {
-        event.preventDefault();
+    function goToWelcomeWithSlide() {
         const welcomeSection = document.getElementById('welcome-section');
+        if (!welcomeSection) return;
+
         document.documentElement.style.scrollBehavior = 'auto';
-        welcomeSection.scrollIntoView({ behavior: 'instant' });
         window.scrollTo(0, 0);
         document.documentElement.style.scrollBehavior = '';
         triggerWelcomeAnimation();
-    });
+    }
+
+    function handleSectionNavigation(event) {
+        const href = this.getAttribute('href');
+        if (!href || href === '#') return;
+
+        const targetElement = document.querySelector(href);
+        if (!targetElement) return;
+
+        event.preventDefault();
+
+        if (href === '#welcome-section') {
+            goToWelcomeWithSlide();
+        } else {
+            smoothScrollTo(targetElement);
+        }
+
+        window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+
+    function setupPrimaryNavigation() {
+        if (setupPrimaryNavigation.bound) return;
+        setupPrimaryNavigation.bound = true;
+
+        document.querySelectorAll('#navbarNav .nav-link[href^="#"]').forEach(link => {
+            link.addEventListener('click', handleSectionNavigation);
+        });
+
+        const brandLink = document.getElementById('brand-link');
+        if (brandLink) {
+            brandLink.addEventListener('click', function (event) {
+                event.preventDefault();
+                goToWelcomeWithSlide();
+            });
+        }
+    }
 
     const downArrow = document.getElementById('down-arrow');
     downArrow.addEventListener('click', function () {

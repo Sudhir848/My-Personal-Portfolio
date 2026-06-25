@@ -314,7 +314,8 @@ section h2::after {
 }
 
 
-html.jump-scroll {
+html.jump-scroll,
+html.native-scroll-disabled {
     scroll-behavior: auto !important;
 }
 
